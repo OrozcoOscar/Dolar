@@ -116,14 +116,11 @@ class Canvas{
 			
 	}
 
-	rotate(x,y,a){
+	rotate(cx,cy,a){//recibe el centro de la figura y el angulo en radiandes podria usar toRand(grados)
 		this.ctx.save();
-		this.ctx.translate(x, y);
+		this.ctx.translate(cx, cy);
 		this.ctx.rotate(a);
-	}
-	EndRotate(x,y,a){
-		this.ctx.translate(-x, -y);
-		this.ctx.restore();
+		this.ctx.translate(-cx, -cy);
 	}
 	text(t,x,y,s=23,c="green"){
 		this.ctx.fillStyle=c;
