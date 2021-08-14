@@ -1,7 +1,7 @@
 /**
 OrozcoOscar
-v4.5
-3/08/21
+v4.6
+14/08/21
 **/
 
 function $(argument){class obj{constructor(e){this.element=e,this.this=this.element}html(e){if(!e)return this.this.innerHTML;if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.innerHTML=e;else this.element.innerHTML=e}event(e,t){if(this.element.length>1)for(var n=0;n<this.element.length;n++)this.element[n].this.addEventListener(e,t);else this.element.addEventListener(e,t)}val(e){return e?this.element.value=e:this.element.value}src(e){return e?this.element.src=e:this.element.src}attr(e,t){if(this.element.length>1)for(var n=0;n<this.element.length;n++)this.element[n].attr(e,t);else this.element.setAttribute(e,t)}append(e){try{if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.innerHTML+=e;else this.element.innerHTML+=e}catch(e){}}css(obj){if(this.element.length>1)for(var i=0;i<this.element.length;i++)for(let p in obj)eval("this.element["+i+"].this.style."+p+"='"+obj[p]+"'");else for(let p in obj)eval("this.element.style."+p+"='"+obj[p]+"'")}toggleClass(e){if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.classList.toggle(e);else this.element.classList.toggle(e)}removeClass(e){if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.classList.remove(e);else this.element.classList.remove(e)}}let n;if(document.querySelectorAll(argument).length>1){n=[];for(var i=0;i<document.querySelectorAll(argument).length;i++)n.push(new obj(document.querySelectorAll(argument)[i]))}else n=document.querySelectorAll(argument)[0];try{return n.length,new obj(n)}catch(e){}}
@@ -9,13 +9,16 @@ function createMatriz(f,c,r=0) {let m=[f];for (var i = 0; i <f; i++) {m[i]=[];fo
 function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min;}//no incluye al max
 function Get() {let cont=window.location.search;if(cont.indexOf("=")>-1){let json="{";let get=cont.replace("?","");get=get.split("&");get.map((e,i)=>{e=e.split("=");if(i<get.length-1)json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\",";else json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\""+"}";});return JSON.parse(json);}else return null;}
 
-function toRad(g) {
-	return g*Math.PI/180
-}
-function toGrad(r) {
-	return r*180/Math.PI
-}
-function moveTo(obj,x,y,tipo="relative") {
+const toRad=(g)=>g*Math.PI/180
+const toGrad=(r)=>r*180/Math.PI
+const binToASCII=(bin)=>bin.map(b=>parseInt(b,2).toString(10))//bin:[]
+const numToBin=(num)=>num.toString(2)
+const asciiToText=(ascii)=>String.fromCharCode(...ascii)//ascii:int[]
+const textToAscii=(text)=>text.split("").map(c=>c.charCodeAt(0))
+const textToBin=(text)=>textToAscii(text).map(c=>numToBin(c))
+        
+
+function moveTo(obj,x,y,tipo="relative") {// mueve un elemento html;obj:String("selector del elento (.element,#element o etiqueta html))
 	obj=document.querySelectorAll(obj)
 	obj.forEach((e)=>{
 		e.style.position=tipo
@@ -24,7 +27,7 @@ function moveTo(obj,x,y,tipo="relative") {
 
 	})
 }
-class Canvas{
+class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,new Canvas(".mycanvas")
 	constructor(obj="canvas"){
 		this.this=$(obj).this;
 		this.element=$(obj)
@@ -44,7 +47,8 @@ class Canvas{
 	getCanvas(){
 		return $("canvas");
 	}
-	rect(x,y,w,h,c,f=false,r=false){//x:int y:int w:int h:int c:String(color) f:bool(relleno) r:int,array[4]:int (valores de redondes de las esquinas)
+	rect(x,y,w,h,c,f=false,r=false){
+	//x:int y:int w:int h:int c:String(color) f:bool(relleno) r:int,array[4]:int (valores de redondes de las esquinas)
 		if(r){
 			if(Number(r)){
 				this.ctx.beginPath()
@@ -110,8 +114,8 @@ class Canvas{
 		this.ctx.save();
 		this.ctx.strokeStyle =c;
 		this.ctx.moveTo(xf,yf);
-        this.ctx.lineTo(x,y);
-        this.ctx.stroke();
+      		this.ctx.lineTo(x,y);
+       		this.ctx.stroke();
 		this.ctx.restore();
 			
 	}
@@ -134,17 +138,18 @@ class Canvas{
 		this.height=this.this.height
 		return {w:this.this.width,h:this.this.height}
 	}
-	fill(){
+	fill(){//canvas en tamaño completo de la pag
 		this.this.width=innerWidth;
 		this.this.height=innerHeight;
 		this.width=this.this.width
 		this.height=this.this.height
 		$("body").css({margin:0,overflow:"hidden"});
 	}
-	event(e,f){
+	event(e,f){//añade ventos al canvas "click" ,"key" etc; canvas.event("click",myFuncion)
 		this.element.event(e,f);
 	}
 	img(img,x,y,w,h,cutX=0,cutY=0,cutW=null,cutH=null,espX=1,espY=1){
+		//maneja imagenes;img:Image,x:Int,y:Int,w:Int,h:Int,cutX,cutY,cut... son para recortar,espX,espY son para efecto de espejo
 		(!cutW)?cutW=img.width:false;
 		(!cutH)?cutH=img.height:false;
 
@@ -156,20 +161,20 @@ class Canvas{
 		this.ctx.drawImage(img,cutX,cutY,cutW,cutH,espX*x+ax,espY*y+ay,w,h);
 		this.ctx.scale(espX,espY);
 	}
-	setResponsive(px,py){
+	setResponsive(px,py){//recibe posicion relativa
 		return [px/this.width,py/this.height]
 	}
-	getResponsive(px,py){
+	getResponsive(px,py){//obtiene psicion relativa basada en posiciones absolutas
 		return [px*this.width,py*this.height]
 	}
 	getMousePosition(evt){
 		let ClientRect = this.this.getBoundingClientRect(), 
-        scaleX = this.width / ClientRect.width,
-        scaleY = this.height / ClientRect.height; 
-            return {
-                x: (evt.clientX - ClientRect.left) * scaleX, 
-                y: (evt.clientY - ClientRect.top) * scaleY 
-            }
+        	scaleX = this.width / ClientRect.width,
+        	scaleY = this.height / ClientRect.height; 
+            	return {
+             	   x: (evt.clientX - ClientRect.left) * scaleX, 
+             	   y: (evt.clientY - ClientRect.top) * scaleY 
+           	 }
 	}
 }
 
