@@ -44,7 +44,7 @@ class Canvas{
 	getCanvas(){
 		return $("canvas");
 	}
-	rect(x,y,w,h,c,f=false,r=false){
+	rect(x,y,w,h,c,f=false,r=false){//x:int y:int w:int h:int c:String(color) f:bool(relleno) r:int,array[4]:int (valores de redondes de las esquinas)
 		if(r){
 			if(Number(r)){
 				this.ctx.beginPath()
