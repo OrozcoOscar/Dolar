@@ -16,7 +16,7 @@ const numToBin=(num)=>num.toString(2)
 const asciiToText=(ascii)=>String.fromCharCode(...ascii)//ascii:int[]
 const textToAscii=(text)=>text.split("").map(c=>c.charCodeAt(0))
 const textToBin=(text)=>textToAscii(text).map(c=>numToBin(c))
-        
+const binToNum=(bin)=>parseInt(bin,2);
 
 function moveTo(obj,x,y,tipo="relative") {// mueve un elemento html;obj:String("selector del elento (.element,#element o etiqueta html))
 	obj=document.querySelectorAll(obj)
