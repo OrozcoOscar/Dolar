@@ -1,10 +1,79 @@
 /**
 OrozcoOscar
+v4.8
+9/09/21
+**/
+
+/**
+OrozcoOscar
 v4.6
 14/08/21
 **/
 
-function $(argument){class obj{constructor(e){this.element=e,this.this=this.element}html(e){if(!e)return this.this.innerHTML;if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.innerHTML=e;else this.element.innerHTML=e}event(e,t){if(this.element.length>1)for(var n=0;n<this.element.length;n++)this.element[n].this.addEventListener(e,t);else this.element.addEventListener(e,t)}val(e){return e?this.element.value=e:this.element.value}src(e){return e?this.element.src=e:this.element.src}attr(e,t){if(this.element.length>1)for(var n=0;n<this.element.length;n++)this.element[n].attr(e,t);else this.element.setAttribute(e,t)}append(e){try{if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.innerHTML+=e;else this.element.innerHTML+=e}catch(e){}}css(obj){if(this.element.length>1)for(var i=0;i<this.element.length;i++)for(let p in obj)eval("this.element["+i+"].this.style."+p+"='"+obj[p]+"'");else for(let p in obj)eval("this.element.style."+p+"='"+obj[p]+"'")}toggleClass(e){if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.classList.toggle(e);else this.element.classList.toggle(e)}removeClass(e){if(this.element.length>1)for(var t=0;t<this.element.length;t++)this.element[t].this.classList.remove(e);else this.element.classList.remove(e)}}let n;if(document.querySelectorAll(argument).length>1){n=[];for(var i=0;i<document.querySelectorAll(argument).length;i++)n.push(new obj(document.querySelectorAll(argument)[i]))}else n=document.querySelectorAll(argument)[0];try{return n.length,new obj(n)}catch(e){}}
+function $(argument) {
+	class obj {
+		constructor(e) {
+			this.tag = e
+			if(this.tag.length>1){
+				this._current=[]
+				this.tag.map(t => this._current.push(new obj(t)) )
+			}
+		}
+		html(e) {
+			if (!e) return this.tag.innerHTML;
+			if (this.tag.length > 1)
+				for (var t = 0; t < this.tag.length; t++) this.tag[t].innerHTML = e;
+			else this.tag.innerHTML = e
+		}
+		event(e, t) {
+			if (this.tag.length > 1)
+				for (var n = 0; n < this.tag.length; n++) this.tag[n].addEventListener(e, t);
+			else this.tag.addEventListener(e, t)
+		}
+		val(e) {
+			return e ? this.tag.value = e : this.tag.value
+		}
+		src(e) {
+			return e ? this.tag.src = e : this.tag.src
+		}
+		attr(e, t) {
+			if (this.tag.length > 1)
+				for (var n = 0; n < this.tag.length; n++) this._current[n].attr(e, t);
+			else this.tag.setAttribute(e, t)
+		}
+		append(e) {
+			try {
+				if (this.tag.length > 1)
+					for (var t = 0; t < this.tag.length; t++) this.tag[t].innerHTML += e;
+				else this.tag.innerHTML += e
+			} catch (e) {}
+		}
+		css(obj) {
+			if (this.tag.length > 1)
+				for (var i = 0; i < this.tag.length; i++)
+					for (let p in obj) this.tag[i].style[p]=obj[p]
+			else
+				for (let p in obj) this.tag.style[p]=obj[p]
+		}
+		toggleClass(e) {
+			if (this.tag.length > 1)
+				for (var t = 0; t < this.tag.length; t++) this.tag[t].classList.toggle(e);
+			else this.tag.classList.toggle(e)
+		}
+		removeClass(e) {
+			if (this.tag.length > 1)
+				for (var t = 0; t < this.tag.length; t++) this.tag[t].classList.remove(e);
+			else this.tag.classList.remove(e)
+		}
+	}
+	let n= [];
+	let tag=document.querySelectorAll(argument)
+	if (tag.length > 1) for (var t = 0; t < tag.length; t++) n.push(tag[t]) 
+	else n = tag[0];
+	try {
+		return n.length, new obj(n)
+	} catch (e) {}
+}
 function createMatriz(f,c,r=0) {let m=[f];for (var i = 0; i <f; i++) {m[i]=[];for (var e = 0; e < c; e++) {m[i][e]=r;}}return m;}
 function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min;}//no incluye al max
 function Get() {let cont=window.location.search;if(cont.indexOf("=")>-1){let json="{";let get=cont.replace("?","");get=get.split("&");get.map((e,i)=>{e=e.split("=");if(i<get.length-1)json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\",";else json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\""+"}";});return JSON.parse(json);}else return null;}
@@ -27,20 +96,46 @@ function moveTo(obj,x,y,tipo="relative") {// mueve un elemento html;obj:String("
 
 	})
 }
+class GESTOR{
+	constructor(tag){
+		this.fin=0//Fin del ciclo
+		this.aps=0//Actualizaciones por segundo
+		this.fps=0//Frames por segundo
+		this.tag=tag	
+	}
+    start(tiempo){
+        this.aps++;
+        this.fps++;
+        var diferencia=tiempo-this.fin;
+        if( diferencia > 999 ){
+            if(this.tag!=""){
+                document.querySelector(this.tag).innerHTML=(`
+                tiempo:${tiempo}<br>
+                aps:${this.aps}<br>
+                fps:${this.fps}<br>
+                `);
+            }
+            this.fin=tiempo;
+            this.fps=0;
+            this.aps=0;
+        }
+    }
+   
+}
 class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,new Canvas(".mycanvas")
 	constructor(obj="canvas"){
-		this.this=$(obj).this;
-		this.element=$(obj)
-		this.width=this.this.width
-		this.height=this.this.height
-		if(this.this)this.ctx=this.this.getContext("2d");
+		this.tag=$(obj).tag;
+		this.$=$(obj)
+		this.width=this.tag.width
+		this.height=this.tag.height
+		if(this.tag)this.ctx=this.tag.getContext("2d");
 		else console.error("NO se encuentra un elemnto canvas");
 	}
 	clear(n){
 		if(n){
-			this.rect(0,0,this.this.width,this.this.height,"rgb("+n+")",true)
+			this.rect(0,0,this.tag.width,this.tag.height,"rgb("+n+")",true)
 		}else{
-			this.this.width=this.this.width;
+			this.tag.width=this.tag.width;
 		}
 	}
 
@@ -132,21 +227,21 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 		this.ctx.fillText(t,x,y);
 	}
 	size(w=null,h=null){
-		if(w)this.this.width=w;
-		if(h)this.this.height=h;
-		this.width=this.this.width
-		this.height=this.this.height
-		return {w:this.this.width,h:this.this.height}
+		if(w)this.tag.width=w;
+		if(h)this.tag.height=h;
+		this.width=this.tag.width
+		this.height=this.tag.height
+		return {w:this.tag.width,h:this.tag.height}
 	}
 	fill(){//canvas en tamaño completo de la pag
-		this.this.width=innerWidth;
-		this.this.height=innerHeight;
-		this.width=this.this.width
-		this.height=this.this.height
-		$("body").css({margin:0,overflow:"hidden"});
+		this.tag.width=innerWidth;
+		this.tag.height=innerHeight;
+		this.width=this.tag.width
+		this.height=this.tag.height
+		$("body").css({margin:0,padding:0,overflow:"hidden"});
 	}
 	event(e,f){//añade ventos al canvas "click" ,"key" etc; canvas.event("click",myFuncion)
-		this.element.event(e,f);
+		this.$.event(e,f);
 	}
 	img(img,x,y,w,h,cutX=0,cutY=0,cutW=null,cutH=null,espX=1,espY=1){
 		//maneja imagenes;img:Image,x:Int,y:Int,w:Int,h:Int,cutX,cutY,cut... son para recortar,espX,espY son para efecto de espejo
@@ -168,7 +263,7 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 		return [px*this.width,py*this.height]
 	}
 	getMousePosition(evt){
-		let ClientRect = this.this.getBoundingClientRect(), 
+		let ClientRect = this.tag.getBoundingClientRect(), 
         	scaleX = this.width / ClientRect.width,
         	scaleY = this.height / ClientRect.height; 
             	return {
@@ -177,4 +272,3 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
            	 }
 	}
 }
-
