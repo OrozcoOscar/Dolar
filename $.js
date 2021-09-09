@@ -4,12 +4,6 @@ v4.8
 9/09/21
 **/
 
-/**
-OrozcoOscar
-v4.6
-14/08/21
-**/
-
 function $(argument) {
 	class obj {
 		constructor(e) {
