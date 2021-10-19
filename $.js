@@ -1,7 +1,7 @@
 /**
 OrozcoOscar
-v4.8
-9/09/21
+v4.9
+18/10/21
 **/
 
 function $(argument) {
@@ -64,7 +64,9 @@ function $(argument) {
 	let tag=document.querySelectorAll(argument)
 	if (tag.length > 1) for (var t = 0; t < tag.length; t++) n.push(tag[t]) 
 	else n = tag[0];
-	try {return n.length, new obj(n)} catch (e) {}
+	
+	if(n.legth>0)return (new obj(n))
+	else return undefined
 }
 function createMatriz(f,c,r=0) {let m=[f];for (var i = 0; i <f; i++) {m[i]=[];for (var e = 0; e < c; e++) {m[i][e]=r;}}return m;}
 function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min;}//no incluye al max
