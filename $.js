@@ -148,7 +148,7 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
                 }
             }
             for (let i = 0; i < n; i++) {
-                radians = ToRad(angulo);
+                radians = toRad(angulo);
                 vx[i] = parseInt(x + radio * Math.cos(radians));
                 vy[i] = parseInt(y + radio * Math.sin(radians));
                 angulo += incremento;
