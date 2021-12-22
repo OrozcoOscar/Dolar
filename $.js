@@ -153,12 +153,12 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
                 vy[i] = parseInt(y + radio * Math.sin(radians));
                 angulo += incremento;
             }
-            ctx.beginPath();
-            ctx.moveTo(vx[0], vy[0]);
-            for(let i=1 ; i<vx.length ; i++) {ctx.lineTo( vx[i] , vy[i] )}
+            this.ctx.beginPath();
+            this.ctx.moveTo(vx[0], vy[0]);
+            for(let i=1 ; i<vx.length ; i++) {this.ctx.lineTo( vx[i] , vy[i] )}
 
-            ctx.closePath();
-            ctx.stroke();
+            this.ctx.closePath();
+            this.ctx.stroke();
         }
 	rect(x,y,w,h,c,f=false,r=false){
 	//x:int y:int w:int h:int c:String(color) f:bool(relleno) r:int,array[4]:int (valores de redondes de las esquinas)
