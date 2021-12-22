@@ -12,7 +12,7 @@ function $(argument) {
 				this._current=[]
 				this.tag.map(t => this._current.push(new obj(t)) )
 			}
-			else{ this.tag = e[0]}
+			else{ this.tag = e[0] || e;}
 		}
 		html(e) {
 			if (!e) return this.tag.innerHTML;
