@@ -63,7 +63,7 @@ function $(argument) {
 	let n= [];
 	let tag=document.querySelectorAll(argument)
 	if (tag.length > 1) for (var t = 0; t < tag.length; t++) n.push(tag[t]) 
-	else n = tag[0];
+	else n[0] = tag[0];
 	
 	if(n.legth>0)return (new obj(n))
 	else return undefined
