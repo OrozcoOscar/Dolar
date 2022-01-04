@@ -130,7 +130,7 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 		if(n){
 			this.rect(0,0,this.tag.width,this.tag.height,"rgb("+n+")",true)
 		}else{
-			this.clearRect(0, 0,this.tag.width,this.tag.height);
+			this.ctx.clearRect(0, 0,this.tag.width,this.tag.height);
 		}
 	}
 
