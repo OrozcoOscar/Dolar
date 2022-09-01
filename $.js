@@ -1,7 +1,7 @@
 /**
 OrozcoOscar
-v4.9
-18/10/21
+v4.10
+30/08/22
 **/
 
 function $(argument) {
@@ -24,6 +24,11 @@ function $(argument) {
 			if (this.tag.length > 1)
 				for (var n = 0; n < this.tag.length; n++) this.tag[n].addEventListener(e, t);
 			else this.tag.addEventListener(e, t)
+		}
+		removeEvent(e, t) {
+			if (this.tag.length > 1)
+				for (var n = 0; n < this.tag.length; n++) this.tag[n].removeEventListener(e, t);
+			else this.tag.removeEventListener(e, t)
 		}
 		val(e) {
 			return e ? this.tag.value = e : this.tag.value
@@ -69,11 +74,95 @@ function $(argument) {
 	if(n.length>0)return (new obj(n))
 	else return undefined
 }
+/**
+     * Resolver Ecuaciones lineales 
+     * @param p1 primer punto.
+     * @param p2  segundo punto.
+     */
+function distanceBetweenPoints(p1={x:0,y:0},p2={x:0,y:0}){
+	return Math.sqrt((p1.x-p2.x)**2+(p1.y-p2.y)**2)
+}
 function createMatriz(f,c,r=0) {let m=[f];for (var i = 0; i <f; i++) {m[i]=[];for (var e = 0; e < c; e++) {m[i][e]=r;}}return m;}
 function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min;}//no incluye al max
 function Get() {let cont=window.location.search;if(cont.indexOf("=")>-1){let json="{";let get=cont.replace("?","");get=get.split("&");get.map((e,i)=>{e=e.split("=");if(i<get.length-1)json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\",";else json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\""+"}";});return JSON.parse(json);}else return null;}
+/**
+     * Resolver Ecuaciones lineales 
+     * @param M Matriz de coeficientes.
+     * @param equality  Array de igualdades.
+	 * -----------------------------------
+	 * Ej: M=[[2,1],[5,2]] equality=[10,10]
+	 *  es equivalente  a 2x+y=10 ; 5x+2y=10
+     */
+function solveEquations(M=[[]],equality=[]){
+    let detM=det(M)
+    function remplazarCol(M,V,c){
+        let A=M.map(e=>e.map(i=>i))//Crea una copia para matar el puntero
+        let n=A.length
+        for (let i = 0; i < n; i++) {
+            A[i][c]=V[i]
+        }
+        return A
+    }
+    return equality.map((_,i)=>{
+        let a=det(remplazarCol(M,equality,i))
+        let b=detM
+        if(b==0){
+            return null
+        }else if(b==1){
+            return a
+        }else{
+            return a/b
+        }
+    })
+    
+}
 
+
+/**
+     * Calcula el determinante de una matriz 
+     * @param M Matriz de coeficientes.
+     */
+function det(M){
+    let n=M.length
+    let aux=M
+    let d=0
+    function reduce(x,y,M){
+        let n=M.length
+        let aux=[]
+        for (let i = 0; i < n-1; i++) {
+            aux.push([])
+        }
+        for (let i = 0, a = 0; i < n; i++) {
+            if(i)
+            for (let e = 0; e < n; e++) {
+                if(i!=y && e!=x){
+                    aux[a].push(M[i][e])
+                    if(aux[a].length==n-1){
+                        a++
+                    }
+                }    
+            }
+        }
+        return aux
+    }
+    if(n==1) return (M[0][0])
+    for (let i = 0; i < n; i++) {
+        let coe=M[0][i]
+        if(i%2!=0)coe*=-1
+        d+=coe*det(reduce(i,0,aux))
+    } 
+    
+    return d
+}
+/**
+     * Convierte grados en Radianes 
+     * @param g Grados.
+     */
 const toRad=(g)=>g*Math.PI/180
+/**
+     * Convierte radianes en Grados 
+     * @param g Grados.
+     */
 const toGrad=(r)=>r*180/Math.PI
 const binToASCII=(bin)=>bin.map(b=>parseInt(b,2).toString(10))//bin:[]
 const numToBin=(num)=>num.toString(2)
@@ -81,18 +170,28 @@ const asciiToText=(ascii)=>String.fromCharCode(...ascii)//ascii:int[]
 const textToAscii=(text)=>text.split("").map(c=>c.charCodeAt(0))
 const textToBin=(text)=>textToAscii(text).map(c=>numToBin(c))
 const binToNum=(bin)=>parseInt(bin,2);
-
-function moveTo(obj,x,y,tipo="relative") {// mueve un elemento html;obj:String("selector del elento (.element,#element o etiqueta html))
+/**
+     * mueve un elemento html;
+	 * @param obj:String("selector del elemento (.element,#element o etiqueta html)")
+	 * @param x
+	 * @param y
+	 * @param type tipo de posición (relative,absolute)
+*/
+function moveTo(obj,x,y,type="relative") {
 	obj=document.querySelectorAll(obj)
 	obj.forEach((e)=>{
-		e.style.position=tipo
+		e.style.position=type
 		e.style.left=x+"px"
 		e.style.top=y+"px"
 
 	})
 }
+/**
+     * Muestra los fps;
+	 * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
+*/
 class GESTOR{
-	constructor(tag){
+	constructor(tag=""){
 		this.fin=0//Fin del ciclo
 		this.aps=0//Actualizaciones por segundo
 		this.fps=0//Frames por segundo
@@ -117,7 +216,15 @@ class GESTOR{
     }
    
 }
-class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,new Canvas(".mycanvas")
+/**
+     * Prepara un Canvas 
+	 * new Canvas()  o new Canvas("#mycanvas") 
+	 * si solo hay un canvas,new Canvas(".mycanvas")
+     * @param obj new Canvas().
+     * @param obj  new Canvas("#mycanvas").
+	 * @param obj  new Canvas(".mycanvas").
+     */
+class Canvas{
 	constructor(obj="canvas"){
 		this.tag=$(obj).tag;
 		this.$=$(obj)
@@ -137,7 +244,7 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 	getCanvas(){
 		return $("canvas");
 	}
-	polygon(x,y, n, radio, angulo=undefined){
+	polygon(x,y, n, radio, angulo=undefined,f=false){
             let incremento= 360/n;
             let vx=[], vy=[];
             let radians;
@@ -159,6 +266,7 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 
             this.ctx.closePath();
             this.ctx.stroke();
+			if(f)this.ctx.fill();
         }
 	rect(x,y,w,h,c,f=false,r=false){
 	//x:int y:int w:int h:int c:String(color) f:bool(relleno) r:int,array[4]:int (valores de redondes de las esquinas)
@@ -206,6 +314,15 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 		this.ctx.fillStyle =c;
 		this.ctx.strokeStyle =c;
 		this.ctx.arc(x,y,r,0,Math.PI*2);
+		this.ctx.stroke();
+		if(f)this.ctx.fill();
+	}
+	arc(x,y,r,ang=0,angf=Math.PI*2,c,f=false){
+		this.ctx.beginPath()
+		this.ctx.save();
+		this.ctx.fillStyle =c;
+		this.ctx.strokeStyle =c;
+		this.ctx.arc(x,y,r,angf,ang);
 		this.ctx.stroke();
 		if(f)this.ctx.fill();
 	}
@@ -260,6 +377,9 @@ class Canvas{// new Canvas()  o new Canvas("#mycanvas") si solo hay un canvas,ne
 	}
 	event(e,f){//añade ventos al canvas "click" ,"key" etc; canvas.event("click",myFuncion)
 		this.$.event(e,f);
+	}
+	removeEvent(e,f){//quita ventos al canvas "click" ,"key" etc; canvas.event("click",myFuncion)
+		this.$.removeEvent(e,f);
 	}
 	img(img,x,y,w,h,cutX=0,cutY=0,cutW=null,cutH=null,espX=1,espY=1){
 		//maneja imagenes;img:Image,x:Int,y:Int,w:Int,h:Int,cutX,cutY,cut... son para recortar,espX,espY son para efecto de espejo
