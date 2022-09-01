@@ -1,5 +1,5 @@
 # Dolar
-library in js to facilitate the use of Canvas and the management of the Dom
+library in js to facilitate the use of Canvas and the management of the Dom, it also provides different functions.
 
 
 #cdn
