@@ -3,4 +3,4 @@ library in js to facilitate the use of Canvas and the management of the Dom, it 
 
 
 #cdn
-https://rawcdn.githack.com/OrozcoOscar/Dolar/984199767fb5e98b19064af26327f83ebc6e1868/$.js
+https://rawcdn.githack.com/OrozcoOscar/Dolar/0e54db7b324d6e9e44b6f9e4cb700a1e526f5527/$.js
