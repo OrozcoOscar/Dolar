@@ -249,6 +249,30 @@ function moveTo(obj,x,y,type="relative") {
 	})
 }
 /**
+ * calcula la intersección de dos circunferencias 
+ * @param {number} h centro en x circunferencia 1
+ * @param {number} k centro en y circunferencia 1
+ * @param {number} r radio circunferencia 1
+ * @param {number} a centro en x circunferencia 2
+ * @param {number} b centro en y circunferencia 2
+ * @param {number} c radio circunferencia 2
+ * @return "[{x,y},{x,y}]" retorna un vector de dos puntos
+ */
+function intersectionCircles(h,k,r,a,b,c){
+	let w= -1*h**2 + a**2 + b**2 - c**2 - k**2 + r**2;
+	let t= -2*b + 2*k;
+	let z= 2*(-h + a);
+	let parte1=  -t*w + t*z*h + k*z**2; 
+	let asd= t**2*r**2 - k**2*t**2 - 2*k*t*w + z*( -z*h**2 + 2*w*h + 2*k*t*h + z*r**2) - w**2;
+	let parte2= z*Math.sqrt(asd);
+	let denominador= t**2 + z**2;
+	let y1= (parte1 + parte2)/denominador;
+	let y2= (parte1 - parte2)/denominador;
+	let x1= (y1*t + w)/z;
+	let x2= (y2*t + w)/z;
+	return [{x: x1, y: y1},{x: x2, y: y2}];
+}
+/**
      * Muestra los fps;
 	 * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
 */
