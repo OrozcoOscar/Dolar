@@ -84,3 +84,66 @@ _**obj**_
     $("#micaja").val()
     -> Hola
 ```
+
+* _**src(e)**_ 
+  > Retorna o modifica el src de un elemento HTML.
+  >
+  > **e:(string|undefined)** Valor a modificar
+
+```
+    $("#micaja").src("http://www.algo.com")
+```
+> Si **e** no se especifica retorna el valor.
+```
+    $("#micaja").src()
+    -> "http://www.algo.com"
+```
+
+* _**attr(e,t)**_ 
+  > Inserta Atributos a uno o varios elementos HTML.
+  >
+  > **e:(string)** Nombre del Atributo
+  >
+  > **t:(string)** Valor del Atributo
+
+```
+    $("#micaja").attr("style","background:red")
+```
+* _**append(e)**_ 
+  > Inserta contenido al final a uno o varios elementos HTML.
+  >
+  > **e:(string)** Contenido
+  
+```
+    $("#micaja").append("<h1>Hola Mundo</h1>")
+```
+
+* _**css(obj)**_ 
+  > Inserta Css a uno o varios elementos HTML.
+  >
+  > **obj:(Json)** Css
+  
+```
+    $("#micaja").css({
+        "background":"red",
+        "color":"white"
+    })
+```
+
+* _**toggleClass(e)**_ 
+  > Inserta clase a uno o varios elementos HTML.
+  >
+  > **e:(string)** nombre de la clase
+  
+```
+    $("#micaja").toggleClass(".active")
+```
+
+* _**removeClass(e)**_ 
+  > Quita clase a uno o varios elementos HTML.
+  >
+  > **e:(string)** nombre de la clase
+  
+```
+    $("#micaja").removeClass(".active")
+```
