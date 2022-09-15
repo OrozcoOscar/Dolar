@@ -1,14 +1,14 @@
 # Dolar
-library in js to facilitate the use of Canvas and the management of the Dom, it also provides different functions.
+Biblioteca en js para facilitar el uso de Canvas y la gestión del Dom, también proporciona diferentes funciones.
 
 
 # cdn
 https://raw.githack.com/OrozcoOscar/Dolar/main/$.js
 
 
-### Funciones
+# Funciones
 
-_**$(argument)**_
+### _**$(argument)**_
 > función para facilitar el manejo del DOM.
 > 
 > **argument:String** es un Selector Css (".micaja","#midiv","body",etc..).
@@ -20,10 +20,195 @@ $("#micaja")
 ->  obj {tag: div#micaja}
 ```
 
-### Clases
 
-## _**obj**_
-> Esta clase no puede ser Instanciada pero es retornada por la función **$**.
+### _**distanceBetweenPoints(p1,p2)**_
+> Calcula la Distancia entre dos puntos.
+> 
+> **p1:Obj** Punto formado por x e y.
+>
+> **p2:Obj** Punto formado por x e y.
+```
+distanceBetweenPoints({x:4,y:20},{x:23,y:12})
+
+->  20.615528128088304
+```
+
+### _**createMatriz(f,c,r)**_
+> Calcula la Distancia entre dos puntos.
+> 
+> **f:Number** Numero de Filas.
+>
+> **c:Number** Numero de Columnas.
+>
+> **r:Any** Relleno.
+```
+createMatriz(3,3,1)
+
+->  
+    [1, 1, 1]
+    [1, 1, 1]
+    [1, 1, 1]
+```
+
+### _**Random(min,max)**_
+> Calcula la Distancia entre dos puntos.
+> 
+> **min:Number** Numero mínimo del rango.
+>
+> **max:Number** Numero máximo del rango.
+```
+Random(1,10)
+
+->  5
+```
+
+### _**Get()**_
+> Retorna un json con los parámetros obtenidos de la url o método GET.
+```
+url:http://127.0.0.1:5500/index.html?q=1&p=5
+
+Get()
+
+->  {q: '1', p: '5'}
+```
+
+
+### _**solveEquations(M,equality)**_
+> Resuelve Ecuaciones lineales .
+>
+> **M:Array** Matriz de coeficientes
+>
+> **equality:Array** Array de igualdades.
+>
+>2x+y=10
+>5x+2y=10
+```
+let M=[[2,1],[5,2]];
+let equality=[10,10];
+
+solveEquations(M,equality)
+
+-> [-10, 30]
+```
+> Quiere decir que **x=-10**,**y=30**
+
+### _**det(M)**_
+> Calcula el determinante de una matriz .
+>
+> **M:Array** Matriz 
+
+```
+let M=[[2,1],[5,2]];
+
+det(M)
+
+-> -1
+```
+
+### _**toRad(g)**_
+> Convierte Grados en Radianes .
+>
+> **g:Number** Numero de Grados 
+
+```
+toRad(90)
+
+-> 1.5707963267948966
+```
+
+### _**toGrad(r)**_
+> Convierte Radianes en Grados .
+>
+> **r:Number** Numero de Radianes 
+
+```
+toGrad(1.5707963267948966)
+
+-> 90
+```
+
+### _**binToASCII(bin)**_
+> Convierte Binario en ascii .
+>
+> **bin:Array** Array de numero binario 
+
+```
+binToASCII(["10100010"])
+
+-> ['162']
+```
+
+### _**numToBin(num)**_
+> Convierte números en binario
+>
+> **num:Number** numero decimal 
+
+```
+numToBin(20)
+
+-> "10100"
+```
+
+### _**asciiToText(ascii)**_
+> Convierte números ascii en texto
+>
+> **ascii:Array** Array de números ascii.
+
+```
+asciiToText(['104', '111', '108', '97'])
+
+-> 'hola'
+```
+### _**textToAscii(text)**_
+> Convierte texto en  ascii
+>
+> **text:String** Texto a convertir.
+
+```
+textToAscii("hola")
+
+-> ['104', '111', '108', '97']
+```
+### _**textToBin(text)**_
+> Convierte texto en  binario
+>
+> **text:String** Texto a convertir.
+
+```
+textToBin("hola")
+
+-> ['1101000', '1101111', '1101100', '1100001']
+```
+
+### _**binToText(bin)**_
+> Convierte binario en  texto
+>
+> **bin:Array** array de binarios.
+
+```
+binToText(['1101000', '1101111', '1101100', '1100001'])
+
+-> 'hola'
+```
+
+### _**binToNum(bin)**_
+> Convierte binario en decimal
+>
+> **bin:String** numero binario a convertir.
+
+```
+binToText(['1101000', '1101111', '1101100', '1100001'])
+
+-> 'hola'
+```
+
+
+
+
+# Clases
+
+### _**obj**_
+> Esta clase no puede ser instanciada pero es retornada por la función **$**.
 * _**tag**_ 
   > Retorna el elemento HTML.
 
@@ -147,3 +332,4 @@ $("#micaja")
 ```
     $("#micaja").removeClass(".active")
 ```
+### _**Canvas**_
