@@ -36,9 +36,9 @@ distanceBetweenPoints({x:4,y:20},{x:23,y:12})
 ### _**createMatriz(f,c,r)**_
 > Calcula la Distancia entre dos puntos.
 > 
-> **f:Number** Numero de Filas.
+> **f:Number** Número de Filas.
 >
-> **c:Number** Numero de Columnas.
+> **c:Number** Número de Columnas.
 >
 > **r:Any** Relleno.
 ```
@@ -53,9 +53,9 @@ createMatriz(3,3,1)
 ### _**Random(min,max)**_
 > Calcula la Distancia entre dos puntos.
 > 
-> **min:Number** Numero mínimo del rango.
+> **min:Number** Número mínimo del rango.
 >
-> **max:Number** Numero máximo del rango.
+> **max:Number** Número máximo del rango.
 ```
 Random(1,10)
 
@@ -108,7 +108,7 @@ det(M)
 ### _**toRad(g)**_
 > Convierte Grados en Radianes .
 >
-> **g:Number** Numero de Grados 
+> **g:Number** Número de Grados 
 
 ```
 toRad(90)
@@ -119,7 +119,7 @@ toRad(90)
 ### _**toGrad(r)**_
 > Convierte Radianes en Grados .
 >
-> **r:Number** Numero de Radianes 
+> **r:Number** Número de Radianes 
 
 ```
 toGrad(1.5707963267948966)
@@ -130,7 +130,7 @@ toGrad(1.5707963267948966)
 ### _**binToASCII(bin)**_
 > Convierte Binario en ascii .
 >
-> **bin:Array** Array de numero binario 
+> **bin:Array** Array de Número binario 
 
 ```
 binToASCII(["10100010"])
@@ -141,7 +141,7 @@ binToASCII(["10100010"])
 ### _**numToBin(num)**_
 > Convierte números en binario
 >
-> **num:Number** numero decimal 
+> **num:Number** Número decimal 
 
 ```
 numToBin(20)
@@ -194,7 +194,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 ### _**binToNum(bin)**_
 > Convierte binario en decimal
 >
-> **bin:String** numero binario a convertir.
+> **bin:String** Número binario a convertir.
 
 ```
 binToText(['1101000', '1101111', '1101100', '1100001'])
