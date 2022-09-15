@@ -341,9 +341,10 @@ class Canvas{
 	 * @param {number} n Numero de lados
 	 * @param {number} radio 
 	 * @param {number|undefined} angulo 
+	 * @param {string} c Color 
 	 * @param {boolean} f Relleno o no relleno por defecto esta en false
 	 */
-	polygon(x,y, n, radio, angulo=undefined,f=false){
+	polygon(x,y, n, radio, angulo=undefined,c="",f=false){
             let incremento= 360/n;
             let vx=[], vy=[];
             let radians;
@@ -360,9 +361,11 @@ class Canvas{
                 angulo += incremento;
             }
             this.ctx.beginPath();
+	    this.ctx.fillStyle =c;
+	    this.ctx.strokeStyle =c;
             this.ctx.moveTo(vx[0], vy[0]);
             for(let i=1 ; i<vx.length ; i++) {this.ctx.lineTo( vx[i] , vy[i] )}
-
+	    
             this.ctx.closePath();
             this.ctx.stroke();
 			if(f)this.ctx.fill();
