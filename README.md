@@ -22,7 +22,7 @@ $("#micaja")
 
 ### Clases
 
-_**obj**_
+## _**obj**_
 > Esta clase no puede ser Instanciada pero es retornada por la función **$**.
 * _**tag**_ 
   > Retorna el elemento HTML.
