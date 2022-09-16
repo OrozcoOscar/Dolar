@@ -92,6 +92,48 @@ solveEquations(M,equality)
 ```
 > Quiere decir que **x=-10**,**y=30**
 
+
+### _**calcularAnguloCuadrante(p1,p2)**_
+> Calcula el angulo según el cuadrante
+>
+> **p1:Obj-> {x:0,y:0}** primer punto.
+> **p2:Obj-> {x:0,y:0}** segundo punto.
+
+```
+calcularAnguloCuadrante(undefined,{x:20,y:20})
+
+-> 0.7853981633974483
+```
+```
+calcularAnguloCuadrante({x:20,y:20},{x:10,y:10})
+
+-> 3.9269908169872414
+```
+
+
+### _**slope(p1,p2)**_
+> Calcula la pendiente entre dos puntos
+>
+> **p1:Obj-> {x:0,y:0}** primer punto.
+> **p2:Obj-> {x:0,y:0}** segundo punto.
+
+```
+slope({x:20,y:20},{x:10,y:90})
+
+-> -7
+```
+### _**angleSlope(m)**_
+> Calcula el angulo en Radianes de una pendiente
+>
+> **m:Number** Pendiente.
+
+```
+angleSlope(-7)
+
+-> -1.4288992721907328
+```
+
+
 ### _**det(M)**_
 > Calcula el determinante de una matriz .
 >
@@ -201,7 +243,6 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 
 -> 'hola'
 ```
-
 
 
 
