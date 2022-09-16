@@ -1,7 +1,7 @@
 /**
 OrozcoOscar
-v4.12
-3/09/22
+v4.13
+16/09/22
 **/
 /**
  * Función para facilitar el manejo del DOM
@@ -148,8 +148,8 @@ function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min
 function Get() {let cont=window.location.search;if(cont.indexOf("=")>-1){let json="{";let get=cont.replace("?","");get=get.split("&");get.map((e,i)=>{e=e.split("=");if(i<get.length-1)json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\",";else json+="\""+e[0]+"\":\""+e[1].replace(/%20/g," ")+"\""+"}";});return JSON.parse(json);}else return null;}
 /**
      * Resolver Ecuaciones lineales 
-     * @param M Matriz de coeficientes.
-     * @param equality  Array de igualdades.
+     * @param {Array} M Matriz de coeficientes.
+     * @param {Array} equality  Array de igualdades.
 	 * @return "Array" con los resultados (null o undefine es que no tiene solución )
 	 * -----------------------------------
 	 * Ej: M=[[2,1],[5,2]] equality=[10,10]
@@ -178,11 +178,38 @@ function solveEquations(M=[[]],equality=[]){
     })
     
 }
-
-
+/**
+     * Calcula el angulo según el cuadrante  
+     * @param {Object} p1 primer punto 
+     * @param {Object} p2  segundo punto 
+     */
+function calcularAnguloCuadrante(p1={x:0,y:0},p2={x:0,y:0}){
+	let a=angleSlope(slope(p1,p2))
+	if((p2.x<=p1.x && p2.y<=p1.y) || (p2.x<p1.x&& p2.y>=p1.y)){
+		a=Math.PI+a
+	}else if(p2.y<p1.y){
+		a=2*Math.PI+a
+	}
+	return a
+}
+/**
+ * Calcula la pendiente entre dos puntos
+* @param {Object} p1 primer punto 
+* @param {Object} p2 segundo punto 
+*/
+function slope(p1={x:0,y:0},p2={x:0,y:0}){
+	return (p2.y-p1.y)/(p2.x-p1.x)
+}
+/**
+ * Calcula el angulo en Radianes de una pendiente
+ * @param {Number} m Pendiente
+ */
+function angleSlope(m){
+	return Math.atan(m)
+}
 /**
      * Calcula el determinante de una matriz 
-     * @param M Matriz de coeficientes.
+     * @param {Array} M Matriz .
      */
 function det(M){
     let n=M.length
@@ -217,20 +244,49 @@ function det(M){
     return d
 }
 /**
-     * Convierte grados en Radianes 
-     * @param g Grados.
-     */
+ * Convierte grados en Radianes 
+ * @param {Number} g Grados.
+ */
 const toRad=(g)=>g*Math.PI/180
 /**
-     * Convierte radianes en Grados 
-     * @param g Grados.
-     */
+ * Convierte radianes en Grados 
+ * @param {Number} r Radianes.
+ */
 const toGrad=(r)=>r*180/Math.PI
-const binToASCII=(bin)=>bin.map(b=>parseInt(b,2).toString(10))//bin:[]
+/**
+ * Convierte binario en Ascii
+ * @param {Array} bin Array de Números binario.
+ */
+const binToASCII=(bin=[])=>bin.map(b=>parseInt(b,2).toString(10))
+/**
+ * Convierte números en binario
+ * @param {Number} num Numero decimal.
+ */
 const numToBin=(num)=>num.toString(2)
-const asciiToText=(ascii)=>String.fromCharCode(...ascii)//ascii:number[]
+/**
+ * Convierte números ascii en texto
+ * @param {Array} ascii Array de números ascii.
+ */
+const asciiToText=(ascii)=>String.fromCharCode(...ascii)
+/**
+ * Convierte texto en  ascii
+ * @param {String} text Texto a convertir.
+ */
 const textToAscii=(text)=>text.split("").map(c=>c.charCodeAt(0))
+/**
+ * Convierte texto en  binario
+ * @param {String} text Texto a convertir.
+ */
 const textToBin=(text)=>textToAscii(text).map(c=>numToBin(c))
+/**
+ * Convierte binario en  texto
+ * @param {Array} bin array de binarios.
+ */
+ const binToText=(bin)=>asciiToText(binToASCII(bin))
+/**
+ * Convierte binario en decimal
+ * @param {String} bin numero binario a convertir.
+ */
 const binToNum=(bin)=>parseInt(bin,2);
 /**
      * mueve un elemento html;
@@ -247,30 +303,6 @@ function moveTo(obj,x,y,type="relative") {
 		e.style.top=y+"px"
 
 	})
-}
-/**
- * calcula la intersección de dos circunferencias 
- * @param {number} h centro en x circunferencia 1
- * @param {number} k centro en y circunferencia 1
- * @param {number} r radio circunferencia 1
- * @param {number} a centro en x circunferencia 2
- * @param {number} b centro en y circunferencia 2
- * @param {number} c radio circunferencia 2
- * @return "[{x,y},{x,y}]" retorna un vector de dos puntos
- */
-function intersectionCircles(h,k,r,a,b,c){
-	let w= -1*h**2 + a**2 + b**2 - c**2 - k**2 + r**2;
-	let t= -2*b + 2*k;
-	let z= 2*(-h + a);
-	let parte1=  -t*w + t*z*h + k*z**2; 
-	let asd= t**2*r**2 - k**2*t**2 - 2*k*t*w + z*( -z*h**2 + 2*w*h + 2*k*t*h + z*r**2) - w**2;
-	let parte2= z*Math.sqrt(asd);
-	let denominador= t**2 + z**2;
-	let y1= (parte1 + parte2)/denominador;
-	let y2= (parte1 - parte2)/denominador;
-	let x1= (y1*t + w)/z;
-	let x2= (y2*t + w)/z;
-	return [{x: x1, y: y1},{x: x2, y: y2}];
 }
 /**
      * Muestra los fps;
@@ -340,8 +372,7 @@ class Canvas{
 	 * @param {number} y Posición en x
 	 * @param {number} n Numero de lados
 	 * @param {number} radio 
-	 * @param {number|undefined} angulo 
-	 * @param {string} c Color 
+	 * @param {number|undefined} angulo Angulo en grados
 	 * @param {boolean} f Relleno o no relleno por defecto esta en false
 	 */
 	polygon(x,y, n, radio, angulo=undefined,c="",f=false){
@@ -361,11 +392,11 @@ class Canvas{
                 angulo += incremento;
             }
             this.ctx.beginPath();
-	    this.ctx.fillStyle =c;
-	    this.ctx.strokeStyle =c;
+			this.ctx.fillStyle =c;
+			this.ctx.strokeStyle =c;
             this.ctx.moveTo(vx[0], vy[0]);
             for(let i=1 ; i<vx.length ; i++) {this.ctx.lineTo( vx[i] , vy[i] )}
-	    
+
             this.ctx.closePath();
             this.ctx.stroke();
 			if(f)this.ctx.fill();
@@ -495,6 +526,20 @@ class Canvas{
 			
 	}
 	/**
+	 * Pinta un vector o flecha
+	 * @param {number} x Posición en x
+	 * @param {number} y Posición en y
+	 * @param {number} mod Modulo o magnitud
+	 * @param {number} ang angulo en grados
+	 * @param {number} w Ancho de la linea
+	 * @param {string} c Color de la linea
+	 */
+	 vector(x,y,xf,yf,w=3,c){
+		this.line(x,y,xf,yf,w,c)
+		let ang=toGrad(angleSlope(slope({x,y},{x:xf,y:yf})))
+		this.polygon(xf,yf,3,10,ang,c,true)	
+	}
+	/**
 	 * Rota con respecto al angulo (beta)
 	 * @param {number} cx Centro de la figura en x
 	 * @param {number} cy Centro de la figura en y
@@ -604,5 +649,100 @@ class Canvas{
              	   x: (evt.clientX - ClientRect.left) * scaleX, 
              	   y: (evt.clientY - ClientRect.top) * scaleY 
            	 }
+	}
+}
+/**
+ * calcula la intersección de dos circunferencias y retorna un vector de dos puntos
+ * @param {number} h centro en x circunferencia 1
+ * @param {number} k centro en y circunferencia 1
+ * @param {number} r radio circunferencia 1
+ * @param {number} a centro en x circunferencia 2
+ * @param {number} b centro en y circunferencia 2
+ * @param {number} c radio circunferencia 2
+ * @return "[{x,y},{x,y}]" retorna un vector de dos puntos 
+ */
+function intersectionCircles(h,k,r,a,b,c){
+	let w= -1*h**2 + a**2 + b**2 - c**2 - k**2 + r**2;
+	let t= -2*b + 2*k;
+	let z= 2*(-h + a);
+	let parte1=  -t*w + t*z*h + k*z**2; 
+	let asd= t**2*r**2 - k**2*t**2 - 2*k*t*w + z*( -z*h**2 + 2*w*h + 2*k*t*h + z*r**2) - w**2;
+	let parte2= z*Math.sqrt(asd);
+	let denominador= t**2 + z**2;
+	let y1= (parte1 + parte2)/denominador;
+	let y2= (parte1 - parte2)/denominador;
+	let x1= (y1*t + w)/z;
+	let x2= (y2*t + w)/z;
+	return [{x: x1, y: y1},{x: x2, y: y2}];
+}
+
+/**
+ * Defina un Vector posee métodos para operaciones
+ */
+class Vector{
+	constructor(x,y,mod,ang){
+		this.x=x
+		this.y=y
+		this.ang=360-ang
+		this.mod=mod
+		this.xf=Math.cos(toRad(this.ang))*this.mod+this.x
+		this.yf=Math.sin(toRad(this.ang))*this.mod+this.y
+	}
+	/**
+	 * 
+	 * @returns Retorna los datos del vector en formato Json
+	 */
+	getDataJson(){
+		return {...this}
+	}
+	/**
+	 * 
+	 * @returns Retorna los datos del vector en un Array
+	 * 
+	 * Ej:[x,y,xf,yf,mod,ang]
+	 */
+	 getDataArray(){
+		return [this.x,this.y,this.xf,this.yf,this.mod,this.ang]
+	}
+	/**
+	 * 
+	 * @param {Canvas} canvas Recibe una instancia de la clase Canvas donde se va a pintar
+	 * @param {Number} w Ancho de la linea
+	 * @param {String} c Color
+	 */
+	paint(canvas,w,c){
+		canvas.vector(this.x,this.y,this.xf,this.yf,w,c)
+	}
+	setOrigin(x,y){
+		this.x=x
+		this.y=y
+		this.xf=Math.cos(toRad(this.ang))*this.mod+this.x
+		this.yf=Math.sin(toRad(this.ang))*this.mod+this.y
+	}
+	setMod(mod){
+		this.mod=mod
+		this.xf=Math.cos(toRad(this.ang))*this.mod+this.x
+		this.yf=Math.sin(toRad(this.ang))*this.mod+this.y
+	}
+	setAngle(ang){
+		this.ang=360-ang
+		this.xf=Math.cos(toRad(this.ang))*this.mod+this.x
+		this.yf=Math.sin(toRad(this.ang))*this.mod+this.y
+	}
+	// static addition(v1,v2){
+
+	// }
+	/**
+	 * Producto Punto o Escalar
+	 * @param {Number} e Escalar a multiplicar
+	 * @param {Vector} v Vector 
+	 * @returns 
+	 */
+	static productPoint(e,v){
+		let aux=JSON.parse(JSON.stringify(v))
+		let pp=new Vector()
+		Object.assign(pp,aux)
+		pp.setMod(aux.mod*e)
+		return pp
 	}
 }
