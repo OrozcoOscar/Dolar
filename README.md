@@ -14,7 +14,7 @@ https://raw.githack.com/OrozcoOscar/Dolar/main/$.js
 > **argument:String** es un Selector Css (".micaja","#midiv","body",etc..).
 >
 > Esta función retorna una clase **obj**.
-```
+```js
 $("#micaja")
 
 ->  obj {tag: div#micaja}
@@ -27,7 +27,7 @@ $("#micaja")
 > **p1:Obj** Punto formado por x e y.
 >
 > **p2:Obj** Punto formado por x e y.
-```
+```js
 distanceBetweenPoints({x:4,y:20},{x:23,y:12})
 
 ->  20.615528128088304
@@ -41,7 +41,7 @@ distanceBetweenPoints({x:4,y:20},{x:23,y:12})
 > **c:Number** Número de Columnas.
 >
 > **r:Any** Relleno.
-```
+```js
 createMatriz(3,3,1)
 
 ->  
@@ -56,7 +56,7 @@ createMatriz(3,3,1)
 > **min:Number** Número mínimo del rango.
 >
 > **max:Number** Número máximo del rango.
-```
+```js
 Random(1,10)
 
 ->  5
@@ -64,7 +64,7 @@ Random(1,10)
 
 ### _**Get()**_
 > Retorna un json con los parámetros obtenidos de la url o método GET.
-```
+```js
 url:http://127.0.0.1:5500/index.html?q=1&p=5
 
 Get()
@@ -82,7 +82,7 @@ Get()
 >
 >2x+y=10
 >5x+2y=10
-```
+```js
 let M=[[2,1],[5,2]];
 let equality=[10,10];
 
@@ -99,12 +99,12 @@ solveEquations(M,equality)
 > **p1:Obj-> {x:0,y:0}** primer punto.
 > **p2:Obj-> {x:0,y:0}** segundo punto.
 
-```
+```js
 calcularAnguloCuadrante(undefined,{x:20,y:20})
 
 -> 0.7853981633974483
 ```
-```
+```js
 calcularAnguloCuadrante({x:20,y:20},{x:10,y:10})
 
 -> 3.9269908169872414
@@ -117,7 +117,7 @@ calcularAnguloCuadrante({x:20,y:20},{x:10,y:10})
 > **p1:Obj-> {x:0,y:0}** primer punto.
 > **p2:Obj-> {x:0,y:0}** segundo punto.
 
-```
+```js
 slope({x:20,y:20},{x:10,y:90})
 
 -> -7
@@ -127,7 +127,7 @@ slope({x:20,y:20},{x:10,y:90})
 >
 > **m:Number** Pendiente.
 
-```
+```jsjs
 angleSlope(-7)
 
 -> -1.4288992721907328
@@ -139,7 +139,7 @@ angleSlope(-7)
 >
 > **M:Array** Matriz 
 
-```
+```js
 let M=[[2,1],[5,2]];
 
 det(M)
@@ -152,7 +152,7 @@ det(M)
 >
 > **g:Number** Número de Grados 
 
-```
+```jsjs
 toRad(90)
 
 -> 1.5707963267948966
@@ -163,7 +163,7 @@ toRad(90)
 >
 > **r:Number** Número de Radianes 
 
-```
+```js
 toGrad(1.5707963267948966)
 
 -> 90
@@ -174,7 +174,7 @@ toGrad(1.5707963267948966)
 >
 > **bin:Array** Array de Número binario 
 
-```
+```js
 binToASCII(["10100010"])
 
 -> ['162']
@@ -185,7 +185,7 @@ binToASCII(["10100010"])
 >
 > **num:Number** Número decimal 
 
-```
+```js
 numToBin(20)
 
 -> "10100"
@@ -196,7 +196,7 @@ numToBin(20)
 >
 > **ascii:Array** Array de números ascii.
 
-```
+```js
 asciiToText(['104', '111', '108', '97'])
 
 -> 'hola'
@@ -206,7 +206,7 @@ asciiToText(['104', '111', '108', '97'])
 >
 > **text:String** Texto a convertir.
 
-```
+```js
 textToAscii("hola")
 
 -> ['104', '111', '108', '97']
@@ -216,7 +216,7 @@ textToAscii("hola")
 >
 > **text:String** Texto a convertir.
 
-```
+```js
 textToBin("hola")
 
 -> ['1101000', '1101111', '1101100', '1100001']
@@ -227,7 +227,7 @@ textToBin("hola")
 >
 > **bin:Array** array de binarios.
 
-```
+```js
 binToText(['1101000', '1101111', '1101100', '1100001'])
 
 -> 'hola'
@@ -238,7 +238,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 >
 > **bin:String** Número binario a convertir.
 
-```
+```js
 binToText(['1101000', '1101111', '1101100', '1100001'])
 
 -> 'hola'
@@ -253,7 +253,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 * _**tag**_ 
   > Retorna el elemento HTML.
 
-```
+```js
     $("#micaja").tag
 
     -> <div id="micaja"></div>
@@ -263,11 +263,11 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string|undefined)** Contenido a modificar.
 
-```
+```js
     $("#micaja").html("<h1>Hola Mundo</h1>")
 ```
 > Si **e** no se especifica retorna el contenido del elemento.
-```
+```js
     $("#micaja").html()
 
     -> <h1>Hola Mundo</h1>
@@ -279,10 +279,10 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **f:(string)** función que ejecuta el evento _esta función recibe el evento cuando se active_
 
-```
+```js
     $("#micaja").event("click",miFuncion)
 ```
-```
+```js
     $("#micaja").event("click",(e)=>{
         ...
     })
@@ -294,7 +294,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **f:(string)** función que ejecuta el evento _esta función recibe el evento cuando se active_
 
-```
+```js
     $("#micaja").removeEvent("click",miFuncion)
 ```
 * _**val(e)**_ 
@@ -302,11 +302,11 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string|undefined)** Valor a modificar
 
-```
+```js
     $("#micaja").val("Hola")
 ```
 > Si **e** no se especifica retorna el valor.
-```
+```js
     $("#micaja").val()
     -> Hola
 ```
@@ -316,11 +316,11 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string|undefined)** Valor a modificar
 
-```
+```js
     $("#micaja").src("http://www.algo.com")
 ```
 > Si **e** no se especifica retorna el valor.
-```
+```js
     $("#micaja").src()
     -> "http://www.algo.com"
 ```
@@ -332,7 +332,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **t:(string)** Valor del Atributo
 
-```
+```js
     $("#micaja").attr("style","background:red")
 ```
 * _**append(e)**_ 
@@ -340,7 +340,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string)** Contenido
   
-```
+```js
     $("#micaja").append("<h1>Hola Mundo</h1>")
 ```
 
@@ -349,7 +349,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **obj:(Json)** Css
   
-```
+```js
     $("#micaja").css({
         "background":"red",
         "color":"white"
@@ -361,7 +361,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string)** nombre de la clase
   
-```
+```js
     $("#micaja").toggleClass(".active")
 ```
 
@@ -370,7 +370,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
   >
   > **e:(string)** nombre de la clase
   
-```
+```js
     $("#micaja").removeClass(".active")
 ```
 ### _**Canvas**_
