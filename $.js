@@ -494,7 +494,7 @@ class Canvas{
 	 * @param {string} c Color
 	 * @param {boolean} f Relleno o no relleno por defecto esta en false
 	 */
-	elipce(x,y,w,h,c,f=false){
+	elipse(x,y,w,h,c,f=false){
 		let esc=Math.abs(w/h)
 		this.ctx.save();
 		this.ctx.scale(esc, 1);
