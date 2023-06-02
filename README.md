@@ -746,5 +746,5 @@ Si encuentras algún problema o tienes alguna sugerencia de mejora, no dudes en 
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más información.
-```
+
 
