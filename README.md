@@ -132,9 +132,7 @@ Calcula el ángulo entre dos puntos en función del cuadrante en el que se encue
 
 - Parámetros:
   - `p1`: Primer punto con las propiedades `x` y `y`.
-  - `
-
-p2`: Segundo punto con las propiedades `x` y `y`.
+  - `p2`: Segundo punto con las propiedades `x` y `y`.
 - Retorno: El ángulo en radianes.
 
 Ejemplo:
