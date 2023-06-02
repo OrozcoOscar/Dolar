@@ -373,9 +373,46 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 ```js
     $("#micaja").removeClass(".active")
 ```
-### _**Canvas**_
+¡Por supuesto! Aquí tienes un ejemplo de cómo podría ser un archivo `README.md` para la clase `Canvas`:
 
-La clase `Canvas` es una clase que proporciona funciones para dibujar en un lienzo de lienzo HTML5.
+```markdown
+# Canvas Class
+
+La clase `Canvas` es una clase JavaScript que facilita la manipulación y el dibujo en un elemento `<canvas>` utilizando el contexto 2D.
+
+## Instalación
+
+No se requiere ninguna instalación adicional para utilizar la clase `Canvas`. Simplemente asegúrate de incluir el archivo JavaScript que contiene la definición de la clase en tu proyecto.
+
+## Uso
+
+A continuación se muestra cómo puedes instanciar y utilizar la clase `Canvas` en tu proyecto:
+
+1. Asegúrate de tener un elemento `<canvas>` en tu archivo HTML:
+
+```html
+<canvas id="miCanvas"></canvas>
+```
+
+2. En tu archivo JavaScript, crea una instancia de la clase `Canvas` y pásale el id o la referencia del elemento `<canvas>` como argumento:
+
+```javascript
+const canvas = new Canvas("#miCanvas");
+```
+
+3. A partir de la instancia `canvas`, puedes utilizar los métodos proporcionados por la clase para dibujar en el lienzo. Por ejemplo, para dibujar una línea:
+
+```javascript
+canvas.line(100, 100, 200, 200, 5, "blue");
+```
+
+4. Si deseas agregar el lienzo al documento HTML, puedes obtener el elemento `<canvas>` utilizando el método `getCanvas()` y luego agregarlo al DOM. Por ejemplo:
+
+```javascript
+document.body.appendChild(canvas.getCanvas());
+```
+
+Asegúrate de ajustar los parámetros de los métodos según tus necesidades. La clase `Canvas` también tiene otros métodos disponibles, como `size()`, `text()`, `img()`, entre otros, que puedes utilizar para realizar diversas operaciones en el lienzo.
 
 ## Métodos
 
@@ -701,5 +738,15 @@ const gradient = canvas.createRadialGradient(100, 100, 0, 100, 100, 50, [
   { offset: 0, color: "red" },
   { offset: 1, color: "blue" }
 ]);
+```
+
+
+## Contribución
+
+Si encuentras algún problema o tienes alguna sugerencia de mejora, no dudes en abrir un problema o enviar una solicitud de extracción.
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más información.
 ```
 
