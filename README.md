@@ -8,16 +8,164 @@ https://raw.githack.com/OrozcoOscar/Dolar/main/$.js
 
 # Funciones
 
-### _**$(argument)**_
-> función para facilitar el manejo del DOM.
-> 
-> **argument:String** es un Selector Css (".micaja","#midiv","body",etc..).
->
-> Esta función retorna una clase **obj**.
-```js
-$("#micaja")
+# Función $
 
-->  obj {tag: div#micaja}
+La función `$` es una función JavaScript que facilita el manejo del DOM y proporciona métodos para interactuar con elementos HTML.
+
+## Uso
+
+A continuación se describe cómo utilizar la función `$` y los métodos disponibles:
+
+### Selección de elementos
+
+La función `$` selecciona uno o varios elementos HTML utilizando un selector CSS. Puedes pasar el selector como argumento al llamar a la función. Por ejemplo:
+
+```javascript
+const elemento = $("div");
+```
+
+Si hay varios elementos que coinciden con el selector, la función `$` devolverá una instancia de la clase `obj` que contiene una colección de elementos.
+
+### Métodos disponibles
+
+A continuación se describen los métodos disponibles en la clase `obj` que se devuelve al llamar a la función `$`:
+
+#### html(e)
+
+- Descripción: Retorna o modifica el contenido de uno o más elementos HTML.
+- Parámetros:
+  - `e` (opcional): Contenido a modificar.
+- Retorno: `innerHTML` del elemento.
+
+Ejemplo:
+
+```javascript
+const contenido = elemento.html(); // Obtener el contenido
+elemento.html("Nuevo contenido"); // Modificar el contenido
+```
+
+#### event(e, f)
+
+- Descripción: Añade eventos a uno o más elementos HTML.
+- Parámetros:
+  - `e`: Nombre del evento ("click", "key", etc.).
+  - `f`: Función que se ejecuta cuando se produce el evento.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.event("click", miFuncion);
+```
+
+#### removeEvent(e, f)
+
+- Descripción: Quita eventos de uno o más elementos HTML.
+- Parámetros:
+  - `e`: Nombre del evento ("click", "key", etc.).
+  - `f`: Función que se quitó del evento.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.removeEvent("click", miFuncion);
+```
+
+#### val(e)
+
+- Descripción: Retorna o modifica el valor de un elemento HTML.
+- Parámetros:
+  - `e` (opcional): Valor a modificar.
+- Retorno: Valor del elemento.
+
+Ejemplo:
+
+```javascript
+const valor = elemento.val(); // Obtener el valor
+elemento.val("Nuevo valor"); // Modificar el valor
+```
+
+#### src(e)
+
+- Descripción: Retorna o modifica el atributo `src` de un elemento HTML.
+- Parámetros:
+  - `e` (opcional): Valor del atributo `src` a modificar.
+- Retorno: Valor del atributo `src` del elemento.
+
+Ejemplo:
+
+```javascript
+const src = elemento.src(); // Obtener el valor del atributo src
+elemento.src("nueva-imagen.jpg"); // Modificar el valor del atributo src
+```
+
+#### attr(e, t)
+
+- Descripción: Inserta atributos a uno o varios elementos HTML.
+- Parámetros:
+  - `e`: Nombre del atributo.
+  - `t`: Valor del atributo.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.attr("id", "mi-elemento"); // Insertar el atributo id
+```
+
+#### append(e)
+
+- Descripción: Inserta contenido al final de uno o varios elementos HTML.
+- Parámetros:
+  - `e`: Contenido a insertar.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+
+
+elemento.append("<p>Nuevo contenido</p>"); // Insertar un párrafo al final
+```
+
+#### css(obj)
+
+- Descripción: Inserta estilos CSS a uno o varios elementos HTML.
+- Parámetros:
+  - `obj`: Objeto con los estilos CSS.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.css({ color: "red", fontSize: "20px" }); // Aplicar estilos CSS
+```
+
+#### toggleClass(e)
+
+- Descripción: Inserta o quita una clase a uno o varios elementos HTML.
+- Parámetros:
+  - `e`: Nombre de la clase.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.toggleClass("mi-clase"); // Insertar o quitar la clase
+```
+
+#### removeClass(e)
+
+- Descripción: Quita una clase de uno o varios elementos HTML.
+- Parámetros:
+  - `e`: Nombre de la clase.
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+elemento.removeClass("mi-clase"); // Quitar la clase
 ```
 
 
