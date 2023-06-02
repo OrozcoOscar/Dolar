@@ -650,6 +650,28 @@ class Canvas{
              	   y: (evt.clientY - ClientRect.top) * scaleY 
            	 }
 	}
+	/**
+	 * Obtiene la posición del mouse incluso si el canvas se re-dimensiona
+	 * @param {number} centerX centro del gradiente en x
+	 * @param {number} centerY centro del gradiente en y
+	 * @param {number} innerRadius radio interno
+	 * @param {number} outerRadius radio externo
+	 * @param {Array} colorStops { offset, color } offset:(el desplazamiento del color, normalizado entre 0 y 1)  ej[
+            { offset: 0, color: "red" },
+            { offset: 1, color: "#000" }
+          ]
+	 * @returns "obj" un canvasGradiente
+	 */
+	createRadialGradient(centerX=0, centerY=0, innerRadius=0, outerRadius=0, colorStops=[]){
+		const gradient = this.ctx.createRadialGradient(centerX, centerY, innerRadius, centerX, centerY, outerRadius);
+		
+		for (let i = 0; i < colorStops.length; i++) {
+		  const { offset, color } = colorStops[i];
+		  gradient.addColorStop(offset, color);
+		}
+		
+		return gradient;
+	  }
 }
 /**
  * calcula la intersección de dos circunferencias y retorna un vector de dos puntos
