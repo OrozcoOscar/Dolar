@@ -309,30 +309,31 @@ function moveTo(obj,x,y,type="relative") {
 	 * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
 */
 class GESTOR{
-	constructor(tag=""){
-		this.fin=0//Fin del ciclo
-		this.aps=0//Actualizaciones por segundo
-		this.fps=0//Frames por segundo
-		this.tag=tag	
-	}
-    start(tiempo){
-        this.aps++;
-        this.fps++;
-        var diferencia=tiempo-this.fin;
-        if( diferencia > 999 ){
-            if(this.tag!=""){
-                document.querySelector(this.tag).innerHTML=(`
-                tiempo:${tiempo}<br>
-                aps:${this.aps}<br>
-                fps:${this.fps}<br>
-                `);
-            }
-            this.fin=tiempo;
-            this.fps=0;
-            this.aps=0;
-        }
+constructor(tag = "") {
+  this.fin = 0; // Fin del ciclo
+  this.aps = 0; // Actualizaciones por segundo
+  this.fps = 0; // Frames por segundo
+  this.outputElement = document.querySelector(tag);
+}
+
+start = (tiempo) => {
+  this.aps++;
+  this.fps++;
+  var diferencia = tiempo - this.fin;
+  if (diferencia > 999) {
+    if (this.outputElement) {
+      this.outputElement.innerHTML = `
+        Tiempo: ${tiempo}<br>
+        APS: ${this.aps}<br>
+        FPS: ${this.fps}<br>
+      `;
     }
-   
+    this.fin = tiempo;
+    this.fps = 0;
+    this.aps = 0;
+  }
+};
+
 }
 /**
      * Prepara un Canvas 
