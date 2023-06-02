@@ -174,10 +174,7 @@ Ejemplo:
 const angulo = angleSlope(1);
 console.log(angulo); // Resultado: 0.7853981633974483
 ```
---------------------------------------------------------------------------------------------------------------
-Aquí tienes el archivo `README.md` con la descripción y ejemplos de los métodos proporcionados:
 
-```markdown
 # Funciones útiles
 
 Este repositorio contiene una colección de funciones útiles para realizar diferentes tareas en JavaScript.
