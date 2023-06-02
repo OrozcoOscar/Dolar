@@ -356,6 +356,72 @@ moveTo('.element', 100, 200, 'absolute');
 
 # Clases
 
+# GESTOR Class
+
+La clase `GESTOR` es una utilidad que permite calcular y mostrar los FPS (Frames por segundo) y APS (Actualizaciones por segundo) en una aplicación o juego. Proporciona una forma sencilla de realizar un seguimiento del rendimiento de la aplicación y ajustar la optimización si es necesario.
+
+## Uso
+
+1. Instalación: No se requiere ninguna instalación especial para utilizar la clase `GESTOR`. Solo necesitas agregar el código de la clase en tu proyecto.
+
+2. Crear una instancia de GESTOR:
+
+```javascript
+// Crear una instancia de GESTOR
+const gestor = new GESTOR(tag);
+```
+
+Puedes pasar un argumento opcional `tag` que representa la etiqueta CSS del contenedor donde deseas mostrar la salida de los FPS y APS.
+
+3. Llamar al método `start(tiempo)`:
+
+```javascript
+// Dentro del bucle principal de tu aplicación o juego
+gestor.start(tiempo);
+```
+
+El método `start(tiempo)` debe ser llamado en cada iteración del bucle principal de tu aplicación o juego. Debes proporcionar el tiempo actual en milisegundos como argumento.
+
+4. Mostrar la salida de los FPS y APS:
+
+La salida de los FPS y APS se puede mostrar en un elemento HTML utilizando el valor de `tag` especificado al crear la instancia de `GESTOR`. Asegúrate de que exista un elemento en el DOM con la etiqueta CSS especificada para que los resultados se muestren correctamente.
+
+Ejemplo:
+
+```html
+<div class="cont"></div>
+```
+
+En este ejemplo, los resultados se mostrarán en un elemento `<div>` con la clase CSS `"cont"`. Puedes ajustar la etiqueta CSS según tus necesidades.
+
+## Ejemplo completo
+
+Aquí tienes un ejemplo completo de cómo utilizar la clase `GESTOR` en una aplicación o juego:
+
+```javascript
+// Crear una instancia de GESTOR
+const gestor = new GESTOR(".cont");
+
+// Función de bucle de juego (simulada)
+function gameLoop() {
+  // Obtener el tiempo actual en milisegundos
+  const tiempoActual = Date.now();
+
+  // Realizar las actualizaciones del juego
+
+  // Llamar al método start del gestor para calcular y mostrar los FPS y APS
+  gestor.start(tiempoActual);
+
+  // Volver a llamar al bucle del juego
+  requestAnimationFrame(gameLoop);
+}
+
+// Iniciar el bucle del juego
+gameLoop();
+```
+
+En este ejemplo, se crea una instancia de `GESTOR` con la etiqueta CSS `".cont"` para especificar dónde se mostrarán los resultados de los FPS y APS. Luego, se define una función `gameLoop()` que representa el bucle de juego. Dentro de ese bucle, se obtiene el tiempo actual en milisegundos y se llama al método `start` del gestor para calcular y mostrar los FPS y APS. Finalmente, se vuelve a llamar al bucle del juego utilizando `requestAnimationFrame()` para mantener el bucle en funcionamiento.
+
 # obj Class
 > Esta clase no puede ser instanciada pero es retornada por la función **$**.
 
