@@ -7,7 +7,7 @@ https://raw.githack.com/OrozcoOscar/Dolar/main/$.js
 
 
 # Funciones
-
+Este repositorio contiene una colección de funciones útiles para realizar diferentes tareas en JavaScript.
 # Función $
 
 La función `$` es una función JavaScript que facilita el manejo del DOM y proporciona métodos para interactuar con elementos HTML.
@@ -26,10 +26,355 @@ const elemento = $("div");
 
 Si hay varios elementos que coinciden con el selector, la función `$` devolverá una instancia de la clase `obj` que contiene una colección de elementos.
 
+------------------------------------------------------------------------------------------------
+## Función distanceBetweenPoints(p1, p2)
+
+Calcula la distancia entre dos puntos en un plano cartesiano.
+
+- Parámetros:
+  - `p1`: Primer punto con las propiedades `x` y `y`.
+  - `p2`: Segundo punto con las propiedades `x` y `y`.
+- Retorno: La distancia entre los dos puntos.
+
+Ejemplo:
+
+```javascript
+const distancia = distanceBetweenPoints({ x: 0, y: 0 }, { x: 3, y: 4 });
+console.log(distancia); // Resultado: 5
+```
+
+## Función createMatriz(f, c, r)
+
+Crea una matriz con el número de filas y columnas especificadas, y un valor de relleno opcional.
+
+- Parámetros:
+  - `f`: Número de filas.
+  - `c`: Número de columnas.
+  - `r` (opcional): Valor de relleno (por defecto: 0).
+- Retorno: La matriz creada.
+
+Ejemplo:
+
+```javascript
+const matriz = createMatriz(3, 2, 1);
+console.log(matriz);
+/*
+Resultado:
+[
+  [1, 1],
+  [1, 1],
+  [1, 1]
+]
+*/
+```
+
+## Función Random(min, max)
+
+Genera un número aleatorio entre el valor mínimo (incluido) y el valor máximo (excluido).
+
+- Parámetros:
+  - `min`: Valor mínimo.
+  - `max`: Valor máximo.
+- Retorno: El número aleatorio generado.
+
+Ejemplo:
+
+```javascript
+const numero = Random(1, 10);
+console.log(numero); // Resultado: Un número aleatorio entre 1 y 9
+```
+
+## Función Get()
+
+Obtiene los parámetros de la URL o del método GET y los devuelve como un objeto JSON.
+
+- Retorno: Un objeto JSON con los parámetros obtenidos de la URL o del método GET.
+
+Ejemplo:
+
+Supongamos que la URL es `https://example.com/?nombre=John&edad=25`. Podemos obtener los parámetros de la siguiente manera:
+
+```javascript
+const parametros = Get();
+console.log(parametros);
+/*
+Resultado:
+{
+  nombre: "John",
+  edad: "25"
+}
+*/
+```
+
+## Función solveEquations(M, equality)
+
+Resuelve ecuaciones lineales representadas por una matriz de coeficientes y un array de igualdades.
+
+- Parámetros:
+  - `M`: Matriz de coeficientes.
+  - `equality`: Array de igualdades.
+- Retorno: Un array con los resultados de las ecuaciones. Si no tiene solución, devuelve `null` o `undefined`.
+
+Ejemplo:
+
+```javascript
+//2x+y=10
+//5x+2y=10
+const M = [[2, 1], [5, 2]];
+const equality = [10, 10];
+const solucion = solveEquations(M, equality);
+console.log(solucion); // Resultado: [0, 10]
+```
+
+## Función calcularAnguloCuadrante(p1, p2)
+
+Calcula el ángulo entre dos puntos en función del cuadrante en el que se encuentran.
+
+- Parámetros:
+  - `p1`: Primer punto con las propiedades `x` y `y`.
+  - `
+
+p2`: Segundo punto con las propiedades `x` y `y`.
+- Retorno: El ángulo en radianes.
+
+Ejemplo:
+
+```javascript
+const angulo = calcularAnguloCuadrante({ x: 0, y: 0 }, { x: 1, y: 1 });
+console.log(angulo); // Resultado: 0.7853981633974483
+```
+
+## Función slope(p1, p2)
+
+Calcula la pendiente entre dos puntos en un plano cartesiano.
+
+- Parámetros:
+  - `p1`: Primer punto con las propiedades `x` y `y`.
+  - `p2`: Segundo punto con las propiedades `x` y `y`.
+- Retorno: La pendiente entre los dos puntos.
+
+Ejemplo:
+
+```javascript
+const pendiente = slope({ x: 1, y: 2 }, { x: 3, y: 4 });
+console.log(pendiente); // Resultado: 1
+```
+
+## Función angleSlope(m)
+
+Calcula el ángulo en radianes de una pendiente.
+
+- Parámetros:
+  - `m`: Pendiente.
+- Retorno: El ángulo en radianes.
+
+Ejemplo:
+
+```javascript
+const angulo = angleSlope(1);
+console.log(angulo); // Resultado: 0.7853981633974483
+```
+--------------------------------------------------------------------------------------------------------------
+Aquí tienes el archivo `README.md` con la descripción y ejemplos de los métodos proporcionados:
+
+```markdown
+# Funciones útiles
+
+Este repositorio contiene una colección de funciones útiles para realizar diferentes tareas en JavaScript.
+
+## Función det(M)
+
+Calcula el determinante de una matriz.
+
+- Parámetros:
+  - `M`: Matriz.
+- Retorno: El determinante de la matriz.
+
+Ejemplo:
+
+```javascript
+const matriz = [[1, 2], [3, 4]];
+const determinante = det(matriz);
+console.log(determinante); // Resultado: -2
+```
+
+## Función toRad(g)
+
+Convierte grados a radianes.
+
+- Parámetros:
+  - `g`: Grados.
+- Retorno: Los radianes equivalentes a los grados especificados.
+
+Ejemplo:
+
+```javascript
+const radianes = toRad(180);
+console.log(radianes); // Resultado: 3.141592653589793
+```
+
+## Función toGrad(r)
+
+Convierte radianes a grados.
+
+- Parámetros:
+  - `r`: Radianes.
+- Retorno: Los grados equivalentes a los radianes especificados.
+
+Ejemplo:
+
+```javascript
+const grados = toGrad(Math.PI);
+console.log(grados); // Resultado: 180
+```
+
+## Función binToASCII(bin)
+
+Convierte una serie de números binarios en caracteres ASCII.
+
+- Parámetros:
+  - `bin`: Array de números binarios.
+- Retorno: Un array de caracteres ASCII correspondientes a los números binarios especificados.
+
+Ejemplo:
+
+```javascript
+const binarios = ['01100001', '01100010', '01100011'];
+const ascii = binToASCII(binarios);
+console.log(ascii); // Resultado: ['a', 'b', 'c']
+```
+
+## Función numToBin(num)
+
+Convierte un número decimal en binario.
+
+- Parámetros:
+  - `num`: Número decimal.
+- Retorno: El número en representación binaria.
+
+Ejemplo:
+
+```javascript
+const numero = 10;
+const binario = numToBin(numero);
+console.log(binario); // Resultado: '1010'
+```
+
+## Función asciiToText(ascii)
+
+Convierte una serie de números ASCII en texto.
+
+- Parámetros:
+  - `ascii`: Array de números ASCII.
+- Retorno: El texto correspondiente a los números ASCII especificados.
+
+Ejemplo:
+
+```javascript
+const numerosASCII = [97, 98, 99];
+const texto = asciiToText(numerosASCII);
+console.log(texto); // Resultado: 'abc'
+```
+
+## Función textToAscii(text)
+
+Convierte texto en números ASCII.
+
+- Parámetros:
+  - `text`: Texto a convertir.
+- Retorno: Un array de números ASCII correspondientes al texto especificado.
+
+Ejemplo:
+
+```javascript
+const texto = 'abc';
+const numerosASCII = textToAscii(texto);
+console.log(numerosASCII); // Resultado: [97, 98, 99]
+```
+
+## Función textToBin(text)
+
+Convierte texto en representación binaria.
+
+- Parámetros:
+  - `text`: Texto a convertir.
+- Retorno: Un array de números binarios correspondientes al texto especificado.
+
+Ejemplo:
+
+```javascript
+const texto = 'abc';
+const binarios = textToBin(texto);
+console.log(binarios); // Resultado: ['01100001',
+
+ '01100010', '01100011']
+```
+
+## Función binToText(bin)
+
+Convierte una serie de números binarios en texto.
+
+- Parámetros:
+  - `bin`: Array de números binarios.
+- Retorno: El texto correspondiente a los números binarios especificados.
+
+Ejemplo:
+
+```javascript
+const binarios = ['01100001', '01100010', '01100011'];
+const texto = binToText(binarios);
+console.log(texto); // Resultado: 'abc'
+```
+
+## Función binToNum(bin)
+
+Convierte un número binario en decimal.
+
+- Parámetros:
+  - `bin`: Número binario a convertir.
+- Retorno: El número decimal correspondiente al número binario especificado.
+
+Ejemplo:
+
+```javascript
+const binario = '1010';
+const decimal = binToNum(binario);
+console.log(decimal); // Resultado: 10
+```
+
+## Función moveTo(obj, x, y, type)
+
+Mueve un elemento HTML a una posición especificada.
+
+- Parámetros:
+  - `obj`: Selector del elemento (`".element"`, `"#element"` o etiqueta HTML).
+  - `x`: Coordenada X.
+  - `y`: Coordenada Y.
+  - `type`: Tipo de posición (`"relative"`, `"absolute"`).
+- Retorno: Ninguno.
+
+Ejemplo:
+
+```javascript
+moveTo('.element', 100, 200, 'absolute');
+```
+
+# Clases
+
+# obj Class
+> Esta clase no puede ser instanciada pero es retornada por la función **$**.
+
 ### Métodos disponibles
 
 A continuación se describen los métodos disponibles en la clase `obj` que se devuelve al llamar a la función `$`:
+#### tag 
+  > Retorna el elemento HTML.
 
+```js
+    $("#micaja").tag
+
+    -> <div id="micaja"></div>
+```
 #### html(e)
 
 - Descripción: Retorna o modifica el contenido de uno o más elementos HTML.
@@ -167,361 +512,6 @@ Ejemplo:
 ```javascript
 elemento.removeClass("mi-clase"); // Quitar la clase
 ```
-
-
-### _**distanceBetweenPoints(p1,p2)**_
-> Calcula la Distancia entre dos puntos.
-> 
-> **p1:Obj** Punto formado por x e y.
->
-> **p2:Obj** Punto formado por x e y.
-```js
-distanceBetweenPoints({x:4,y:20},{x:23,y:12})
-
-->  20.615528128088304
-```
-
-### _**createMatriz(f,c,r)**_
-> Calcula la Distancia entre dos puntos.
-> 
-> **f:Number** Número de Filas.
->
-> **c:Number** Número de Columnas.
->
-> **r:Any** Relleno.
-```js
-createMatriz(3,3,1)
-
-->  
-    [1, 1, 1]
-    [1, 1, 1]
-    [1, 1, 1]
-```
-
-### _**Random(min,max)**_
-> Calcula la Distancia entre dos puntos.
-> 
-> **min:Number** Número mínimo del rango.
->
-> **max:Number** Número máximo del rango.
-```js
-Random(1,10)
-
-->  5
-```
-
-### _**Get()**_
-> Retorna un json con los parámetros obtenidos de la url o método GET.
-```js
-url:http://127.0.0.1:5500/index.html?q=1&p=5
-
-Get()
-
-->  {q: '1', p: '5'}
-```
-
-
-### _**solveEquations(M,equality)**_
-> Resuelve Ecuaciones lineales .
->
-> **M:Array** Matriz de coeficientes
->
-> **equality:Array** Array de igualdades.
->
->2x+y=10
->5x+2y=10
-```js
-let M=[[2,1],[5,2]];
-let equality=[10,10];
-
-solveEquations(M,equality)
-
--> [-10, 30]
-```
-> Quiere decir que **x=-10**,**y=30**
-
-
-### _**calcularAnguloCuadrante(p1,p2)**_
-> Calcula el angulo según el cuadrante
->
-> **p1:Obj-> {x:0,y:0}** primer punto.
-> **p2:Obj-> {x:0,y:0}** segundo punto.
-
-```js
-calcularAnguloCuadrante(undefined,{x:20,y:20})
-
--> 0.7853981633974483
-```
-```js
-calcularAnguloCuadrante({x:20,y:20},{x:10,y:10})
-
--> 3.9269908169872414
-```
-
-
-### _**slope(p1,p2)**_
-> Calcula la pendiente entre dos puntos
->
-> **p1:Obj-> {x:0,y:0}** primer punto.
-> **p2:Obj-> {x:0,y:0}** segundo punto.
-
-```js
-slope({x:20,y:20},{x:10,y:90})
-
--> -7
-```
-### _**angleSlope(m)**_
-> Calcula el angulo en Radianes de una pendiente
->
-> **m:Number** Pendiente.
-
-```jsjs
-angleSlope(-7)
-
--> -1.4288992721907328
-```
-
-
-### _**det(M)**_
-> Calcula el determinante de una matriz .
->
-> **M:Array** Matriz 
-
-```js
-let M=[[2,1],[5,2]];
-
-det(M)
-
--> -1
-```
-
-### _**toRad(g)**_
-> Convierte Grados en Radianes .
->
-> **g:Number** Número de Grados 
-
-```jsjs
-toRad(90)
-
--> 1.5707963267948966
-```
-
-### _**toGrad(r)**_
-> Convierte Radianes en Grados .
->
-> **r:Number** Número de Radianes 
-
-```js
-toGrad(1.5707963267948966)
-
--> 90
-```
-
-### _**binToASCII(bin)**_
-> Convierte Binario en ascii .
->
-> **bin:Array** Array de Número binario 
-
-```js
-binToASCII(["10100010"])
-
--> ['162']
-```
-
-### _**numToBin(num)**_
-> Convierte números en binario
->
-> **num:Number** Número decimal 
-
-```js
-numToBin(20)
-
--> "10100"
-```
-
-### _**asciiToText(ascii)**_
-> Convierte números ascii en texto
->
-> **ascii:Array** Array de números ascii.
-
-```js
-asciiToText(['104', '111', '108', '97'])
-
--> 'hola'
-```
-### _**textToAscii(text)**_
-> Convierte texto en  ascii
->
-> **text:String** Texto a convertir.
-
-```js
-textToAscii("hola")
-
--> ['104', '111', '108', '97']
-```
-### _**textToBin(text)**_
-> Convierte texto en  binario
->
-> **text:String** Texto a convertir.
-
-```js
-textToBin("hola")
-
--> ['1101000', '1101111', '1101100', '1100001']
-```
-
-### _**binToText(bin)**_
-> Convierte binario en  texto
->
-> **bin:Array** array de binarios.
-
-```js
-binToText(['1101000', '1101111', '1101100', '1100001'])
-
--> 'hola'
-```
-
-### _**binToNum(bin)**_
-> Convierte binario en decimal
->
-> **bin:String** Número binario a convertir.
-
-```js
-binToText(['1101000', '1101111', '1101100', '1100001'])
-
--> 'hola'
-```
-
-
-
-# Clases
-
-### _**obj**_
-> Esta clase no puede ser instanciada pero es retornada por la función **$**.
-* _**tag**_ 
-  > Retorna el elemento HTML.
-
-```js
-    $("#micaja").tag
-
-    -> <div id="micaja"></div>
-```
-* _**html(e)**_ 
-  > Retorna o modifica el contenido de uno o mas elementos HTML.
-  >
-  > **e:(string|undefined)** Contenido a modificar.
-
-```js
-    $("#micaja").html("<h1>Hola Mundo</h1>")
-```
-> Si **e** no se especifica retorna el contenido del elemento.
-```js
-    $("#micaja").html()
-
-    -> <h1>Hola Mundo</h1>
-```
-* _**event(e, f)**_ 
-  > Añade eventos a uno o mas elementos HTML
-  >
-  > **e:(string)** Nombre del evento ("click" ,"key", etc)
-  >
-  > **f:(string)** función que ejecuta el evento _esta función recibe el evento cuando se active_
-
-```js
-    $("#micaja").event("click",miFuncion)
-```
-```js
-    $("#micaja").event("click",(e)=>{
-        ...
-    })
-```
-* _**removeEvent(e, f)**_ 
-  > Quita eventos a uno o mas elementos HTML.
-  >
-  > **e:(string)** Nombre del evento ("click" ,"key", etc)
-  >
-  > **f:(string)** función que ejecuta el evento _esta función recibe el evento cuando se active_
-
-```js
-    $("#micaja").removeEvent("click",miFuncion)
-```
-* _**val(e)**_ 
-  > Retorna o modifica el value de un elemento HTML.
-  >
-  > **e:(string|undefined)** Valor a modificar
-
-```js
-    $("#micaja").val("Hola")
-```
-> Si **e** no se especifica retorna el valor.
-```js
-    $("#micaja").val()
-    -> Hola
-```
-
-* _**src(e)**_ 
-  > Retorna o modifica el src de un elemento HTML.
-  >
-  > **e:(string|undefined)** Valor a modificar
-
-```js
-    $("#micaja").src("http://www.algo.com")
-```
-> Si **e** no se especifica retorna el valor.
-```js
-    $("#micaja").src()
-    -> "http://www.algo.com"
-```
-
-* _**attr(e,t)**_ 
-  > Inserta Atributos a uno o varios elementos HTML.
-  >
-  > **e:(string)** Nombre del Atributo
-  >
-  > **t:(string)** Valor del Atributo
-
-```js
-    $("#micaja").attr("style","background:red")
-```
-* _**append(e)**_ 
-  > Inserta contenido al final a uno o varios elementos HTML.
-  >
-  > **e:(string)** Contenido
-  
-```js
-    $("#micaja").append("<h1>Hola Mundo</h1>")
-```
-
-* _**css(obj)**_ 
-  > Inserta Css a uno o varios elementos HTML.
-  >
-  > **obj:(Json)** Css
-  
-```js
-    $("#micaja").css({
-        "background":"red",
-        "color":"white"
-    })
-```
-
-* _**toggleClass(e)**_ 
-  > Inserta clase a uno o varios elementos HTML.
-  >
-  > **e:(string)** nombre de la clase
-  
-```js
-    $("#micaja").toggleClass(".active")
-```
-
-* _**removeClass(e)**_ 
-  > Quita clase a uno o varios elementos HTML.
-  >
-  > **e:(string)** nombre de la clase
-  
-```js
-    $("#micaja").removeClass(".active")
-```
-
 # Canvas Class
 
 La clase `Canvas` es una clase JavaScript que facilita la manipulación y el dibujo en un elemento `<canvas>` utilizando el contexto 2D.
