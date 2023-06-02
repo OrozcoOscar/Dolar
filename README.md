@@ -375,96 +375,331 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 ```
 ### _**Canvas**_
 
-La clase `Canvas` proporciona métodos para dibujar y manipular gráficos en un lienzo HTML5. A continuación se muestra una lista completa de todos los métodos disponibles con sus descripciones y ejemplos de uso.
+La clase `Canvas` es una clase que proporciona funciones para dibujar en un lienzo de lienzo HTML5.
 
-## clear()
+## Métodos
 
-Elimina todos los elementos dibujados previamente en el lienzo.
+### clear(n)
 
+Limpia el lienzo.
+
+- Parámetros:
+  - `n` (Array): Un array de 3 posiciones [r, g, b] donde r, g y b son números entre 0 y 255. (Opcional)
+
+Ejemplo de uso:
 ```javascript
-canvas.clear();
+canvas.clear([255, 255, 255]);
 ```
 
-## arc(x, y, radius, startAngle, endAngle, counterClockwise = false)
+### getCanvas()
 
-Dibuja un arco circular en el lienzo. El arco está centrado en las coordenadas `(x, y)` con el radio especificado y se extiende desde el `startAngle` hasta el `endAngle`. El parámetro `counterClockwise` determina la dirección de dibujo del arco (sentido de las agujas del reloj o contrario).
+Obtiene el elemento canvas.
 
+- Retorna:
+  - `canvas` (Elemento): El elemento canvas del DOM.
+
+Ejemplo de uso:
 ```javascript
-canvas.arc(100, 100, 50, 0, Math.PI, true);
+const canvasElement = canvas.getCanvas();
 ```
 
-## line(x1, y1, x2, y2)
+### polygon(x, y, n, radio, angulo, c, f)
 
-Dibuja una línea recta en el lienzo desde las coordenadas `(x1, y1)` hasta las coordenadas `(x2, y2)`.
+Dibuja un polígono de n lados en el lienzo.
 
+- Parámetros:
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `n` (Número): Número de lados del polígono.
+  - `radio` (Número): Radio del polígono.
+  - `angulo` (Número|undefined): Ángulo en grados. (Opcional)
+  - `c` (Cadena): Color del polígono.
+  - `f` (Booleano): Indica si el polígono debe ser relleno o no. Valor por defecto: `false`.
+
+Ejemplo de uso:
 ```javascript
-canvas.line(100, 100, 200, 200);
+canvas.polygon(100, 100, 5, 50, undefined, "blue", true);
 ```
 
-## rect(x, y, width, height, color, filled = true)
+### rect(x, y, w, h, c, f, r)
 
-Dibuja un rectángulo en el lienzo con la esquina superior izquierda en las coordenadas `(x, y)`, el ancho y alto especificados, y el color del contorno. El parámetro `filled` determina si el rectángulo está relleno o no.
+Dibuja un rectángulo en el lienzo.
 
+- Parámetros:
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `w` (Número): Ancho del rectángulo.
+  - `h` (Número): Alto del rectángulo.
+  - `c` (Cadena): Color del rectángulo.
+  - `f` (Booleano): Indica si el rectángulo debe ser relleno o no. Valor por defecto: `false`.
+  - `r` (Número|Array): Valor de redondez de las esquinas. Puede ser un número para un redondeo uniforme en todas las esquinas, o un array de 4 posiciones para especificar un redondeo diferente en cada esquina. (Opcional)
+
+Ejemplo de uso:
 ```javascript
-canvas.rect(100, 100, 200, 100, "blue", true);
+canvas.rect(200, 200, 100, 50, "red", true);
 ```
 
-## circle(x, y, radius, color, filled = true)
+### circle(x, y, r, c, f)
 
-Dibuja un círculo en el lienzo con el centro en las coordenadas `(x, y)`, el radio especificado y el color del contorno. El parámetro `filled` determina si el círculo está relleno o no.
+Dibuja un círculo en el lienzo.
 
+- Parámetros:
+  - `x` (Número): Posición en el eje x del centro del círculo.
+  - `y` (Número): Posición en el eje y del centro del círculo.
+  - `r` (Número): Radio del círculo.
+  - `c` (Cadena): Color del círculo.
+  - `f` (Booleano): Indica si el círculo debe ser re
+
+lleno o no. Valor por defecto: `false`.
+
+Ejemplo de uso:
 ```javascript
-canvas.circle(100, 100, 50, "red", true);
+canvas.circle(300, 300, 50, "green");
 ```
 
-## polygon(points, color, filled = true)
+### arc(x, y, r, ang, angf, c, f)
 
-Dibuja un polígono en el lienzo utilizando un array de puntos. Cada punto en el array es un objeto con las coordenadas `x` e `y`. El parámetro `color` establece el color del contorno y el parámetro `filled` determina si el polígono está relleno o no.
+Dibuja un arco en el lienzo.
 
+- Parámetros:
+  - `x` (Número): Posición en el eje x del centro del arco.
+  - `y` (Número): Posición en el eje y del centro del arco.
+  - `r` (Número): Radio del arco.
+  - `ang` (Número): Ángulo inicial en radianes.
+  - `angf` (Número): Ángulo final en radianes.
+  - `c` (Cadena): Color del arco.
+  - `f` (Booleano): Indica si el arco debe ser relleno o no. Valor por defecto: `false`.
+
+Ejemplo de uso:
 ```javascript
-const points = [
-  { x: 100, y: 100 },
-  { x: 200, y: 100 },
-  { x: 150, y: 200 }
-];
-
-canvas.polygon(points, "red", true);
+canvas.arc(400, 400, 50, Math.PI / 4, (3 * Math.PI) / 4, "purple");
 ```
 
-## text(text, x, y, color, font = "12px Arial")
+### elipse(x, y, w, h, c, f)
 
-Dibuja un texto en el lienzo en la posición `(x, y)` con el color y fuente especificados.
+Dibuja una elipse dentro de un rectángulo en el lienzo.
 
+- Parámetros:
+  - `x` (Número): Posición en el eje x del centro del rectángulo.
+  - `y` (Número): Posición en el eje y del centro del rectángulo.
+  - `w` (Número): Ancho del rectángulo que contiene la elipse.
+  - `h` (Número): Alto del rectángulo que contiene la elipse.
+  - `c` (Cadena): Color de la elipse.
+  - `f` (Booleano): Indica si la elipse debe ser rellena o no. Valor por defecto: `false`.
+
+Ejemplo de uso:
 ```javascript
-canvas.text("Hola Mundo", 100, 100, "black", "20px Arial");
+canvas.elipse(500, 500, 100, 50, "orange", true);
+```
+### line(x, y, xf, yf, w, c)
+
+Pinta una línea en el lienzo.
+
+- Parámetros:
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `xf` (Número): Posición final en el eje x.
+  - `yf` (Número): Posición final en el eje y.
+  - `w` (Número): Ancho de la línea. Valor por defecto: 3.
+  - `c` (Cadena): Color de la línea.
+
+Ejemplo de uso:
+```javascript
+canvas.line(100, 100, 200, 200, 5, "blue");
 ```
 
-## image(image, x, y, width, height)
+### vector(x, y, xf, yf, w, c)
 
-Dibuja una imagen en el lienzo en la posición `(x, y)` con el ancho y alto especificados
+Pinta un vector o flecha en el lienzo.
 
-. El parámetro `image` puede ser un objeto `Image` o una URL de imagen.
+- Parámetros:
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `xf` (Número): Posición final en el eje x.
+  - `yf` (Número): Posición final en el eje y.
+  - `w` (Número): Ancho de la línea. Valor por defecto: 3.
+  - `c` (Cadena): Color de la línea.
 
+Ejemplo de uso:
 ```javascript
-const image = new Image();
-image.src = "path/to/image.png";
-
-canvas.image(image, 100, 100, 200, 200);
+canvas.vector(100, 100, 200, 200, 5, "blue");
 ```
 
-## getImageData(x, y, width, height)
+### rotate(cx, cy, a)
 
-Obtiene los datos de píxeles de una región rectangular específica en el lienzo. Los parámetros `x` e `y` especifican la esquina superior izquierda de la región, y `width` y `height` determinan sus dimensiones. Este método devuelve un objeto `ImageData` que contiene información sobre los píxeles.
+Rota la figura con respecto al ángulo (beta) en el lienzo.
 
+- Parámetros:
+  - `cx` (Número): Centro de la figura en el eje x.
+  - `cy` (Número): Centro de la figura en el eje y.
+  - `a` (Número): Ángulo en radianes.
+
+Ejemplo de uso:
 ```javascript
-const imageData = canvas.getImageData(0, 0, 100, 100);
-console.log(imageData.data);  // Array de valores RGBA de los píxeles
+canvas.rotate(100, 100, Math.PI / 4);
 ```
 
-## putImageData(imageData, x, y)
+### text(t, x, y, s, c)
 
-Coloca los datos de píxeles de un objeto `ImageData` en el lienzo en la posición `(x, y)`.
+Pinta un texto en el lienzo.
 
+- Parámetros:
+  - `t` (Cadena): Texto a pintar.
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `s` (Número): Tamaño del texto. Valor por defecto: 23.
+  - `c` (Cadena): Color del texto. Valor por defecto: "green".
+
+Ejemplo de uso:
 ```javascript
-canvas.putImageData(imageData, 100, 100);
+canvas.text("Hello, World!", 100, 100, 30, "red");
 ```
+
+### size(w, h)
+
+Establece el tamaño del lienzo.
+
+- Parámetros:
+  - `w` (Número|null): Ancho del lienzo.
+  - `h` (Número|null): Alto del lienzo.
+
+- Retorna:
+  - `{w, h}` (Objeto): Objeto con las propiedades `w` y `h` que representan el ancho y alto del lienzo respectivamente.
+
+Ejemplo de uso:
+```javascript
+canvas.size(500, 300);
+```
+
+### fill()
+
+Establece el tamaño del lienzo
+
+ al tamaño completo de la página.
+
+Ejemplo de uso:
+```javascript
+canvas.fill();
+```
+
+### event(e, f)
+
+Añade eventos al lienzo.
+
+- Parámetros:
+  - `e` (Cadena): Nombre del evento, por ejemplo, "click" o "keydown".
+  - `f` (Función): Función que se ejecuta cuando ocurre el evento. La función recibe los datos del evento como parámetro.
+
+Ejemplo de uso:
+```javascript
+canvas.event("click", myFunction);
+```
+### removeEvent(e, f)
+
+Quita eventos del lienzo.
+
+- Parámetros:
+  - `e` (Cadena): Nombre del evento, por ejemplo, "click" o "keydown".
+  - `f` (Función): Función que se ejecuta cuando ocurre el evento. La función recibe los datos del evento como parámetro.
+
+Ejemplo de uso:
+```javascript
+canvas.removeEvent("click", myFunction);
+```
+
+### img(img, x, y, w, h, cutX, cutY, cutW, cutH, espX, espY)
+
+Pinta una imagen en el lienzo.
+
+- Parámetros:
+  - `img` (Imagen): Imagen a pintar.
+  - `x` (Número): Posición en el eje x.
+  - `y` (Número): Posición en el eje y.
+  - `w` (Número): Ancho de la imagen.
+  - `h` (Número): Alto de la imagen.
+  - `cutX` (Número): Inicio del recorte en el eje x. Valor por defecto: 0.
+  - `cutY` (Número): Inicio del recorte en el eje y. Valor por defecto: 0.
+  - `cutW` (Número): Ancho del recorte. Valor por defecto: ancho de la imagen original.
+  - `cutH` (Número): Alto del recorte. Valor por defecto: alto de la imagen original.
+  - `espX` (Número): Efecto de espejo en el eje x. Valor por defecto: 1.
+  - `espY` (Número): Efecto de espejo en el eje y. Valor por defecto: 1.
+
+Ejemplo de uso:
+```javascript
+canvas.img(image, 100, 100, 200, 200, 0, 0, 100, 100, -1, 1);
+```
+
+### setResponsive(px, py)
+
+Establece la posición relativa en el lienzo.
+
+- Parámetros:
+  - `px` (Número): Posición relativa en el eje x.
+  - `py` (Número): Posición relativa en el eje y.
+
+- Retorna:
+  - `[px, py]` (Arreglo): Arreglo con las posiciones relativas en el eje x y eje y respectivamente.
+
+Ejemplo de uso:
+```javascript
+const [relativeX, relativeY] = canvas.setResponsive(0.5, 0.5);
+```
+
+### getResponsive(px, py)
+
+Obtiene la posición absoluta basada en las posiciones relativas en el lienzo.
+
+- Parámetros:
+  - `px` (Número): Posición relativa en el eje x.
+  - `py` (Número): Posición relativa en el eje y.
+
+- Retorna:
+  - `[px, py]` (Arreglo): Arreglo con las posiciones absolutas en el eje x y eje y respectivamente.
+
+Ejemplo de uso:
+```javascript
+const [absoluteX, absoluteY] = canvas.getResponsive(0.5, 0.5);
+```
+
+### getMousePosition(evt)
+
+Obtiene la posición del mouse incluso si el
+
+ lienzo se redimensiona.
+
+- Parámetros:
+  - `evt` (Evento): Evento del mouse.
+
+- Retorna:
+  - `{x, y}` (Objeto): Objeto con las posiciones exactas del mouse.
+
+Ejemplo de uso:
+```javascript
+canvas.tag.addEventListener("mousemove", function(evt) {
+  const { x, y } = canvas.getMousePosition(evt);
+  console.log(`Mouse position: x=${x}, y=${y}`);
+});
+```
+
+### createRadialGradient(centerX, centerY, innerRadius, outerRadius, colorStops)
+
+Crea un gradiente radial en el lienzo.
+
+- Parámetros:
+  - `centerX` (Número): Centro del gradiente en el eje x. Valor por defecto: 0.
+  - `centerY` (Número): Centro del gradiente en el eje y. Valor por defecto: 0.
+  - `innerRadius` (Número): Radio interno del gradiente. Valor por defecto: 0.
+  - `outerRadius` (Número): Radio externo del gradiente. Valor por defecto: 0.
+  - `colorStops` (Arreglo): Arreglo de objetos `{ offset, color }` que representan los puntos de parada del gradiente. El desplazamiento del color debe estar normalizado entre 0 y 1.
+
+- Retorna:
+  - `gradient` (Objeto): Objeto `canvasGradiente` que representa el gradiente radial creado.
+
+Ejemplo de uso:
+```javascript
+const gradient = canvas.createRadialGradient(100, 100, 0, 100, 100, 50, [
+  { offset: 0, color: "red" },
+  { offset: 1, color: "blue" }
+]);
+```
+
