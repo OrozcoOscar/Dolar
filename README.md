@@ -362,7 +362,7 @@ La clase `GESTOR` es una utilidad que permite calcular y mostrar los FPS (Frames
 
 ## Uso
 
-1. Instalación: No se requiere ninguna instalación especial para utilizar la clase `GESTOR`. Solo necesitas agregar el código de la clase en tu proyecto.
+1. Instalación: No se requiere ninguna instalación especial para utilizar la clase `GESTOR`.
 
 2. Crear una instancia de GESTOR:
 
