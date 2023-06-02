@@ -374,3 +374,97 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
     $("#micaja").removeClass(".active")
 ```
 ### _**Canvas**_
+
+La clase `Canvas` proporciona métodos para dibujar y manipular gráficos en un lienzo HTML5. A continuación se muestra una lista completa de todos los métodos disponibles con sus descripciones y ejemplos de uso.
+
+## clear()
+
+Elimina todos los elementos dibujados previamente en el lienzo.
+
+```javascript
+canvas.clear();
+```
+
+## arc(x, y, radius, startAngle, endAngle, counterClockwise = false)
+
+Dibuja un arco circular en el lienzo. El arco está centrado en las coordenadas `(x, y)` con el radio especificado y se extiende desde el `startAngle` hasta el `endAngle`. El parámetro `counterClockwise` determina la dirección de dibujo del arco (sentido de las agujas del reloj o contrario).
+
+```javascript
+canvas.arc(100, 100, 50, 0, Math.PI, true);
+```
+
+## line(x1, y1, x2, y2)
+
+Dibuja una línea recta en el lienzo desde las coordenadas `(x1, y1)` hasta las coordenadas `(x2, y2)`.
+
+```javascript
+canvas.line(100, 100, 200, 200);
+```
+
+## rect(x, y, width, height, color, filled = true)
+
+Dibuja un rectángulo en el lienzo con la esquina superior izquierda en las coordenadas `(x, y)`, el ancho y alto especificados, y el color del contorno. El parámetro `filled` determina si el rectángulo está relleno o no.
+
+```javascript
+canvas.rect(100, 100, 200, 100, "blue", true);
+```
+
+## circle(x, y, radius, color, filled = true)
+
+Dibuja un círculo en el lienzo con el centro en las coordenadas `(x, y)`, el radio especificado y el color del contorno. El parámetro `filled` determina si el círculo está relleno o no.
+
+```javascript
+canvas.circle(100, 100, 50, "red", true);
+```
+
+## polygon(points, color, filled = true)
+
+Dibuja un polígono en el lienzo utilizando un array de puntos. Cada punto en el array es un objeto con las coordenadas `x` e `y`. El parámetro `color` establece el color del contorno y el parámetro `filled` determina si el polígono está relleno o no.
+
+```javascript
+const points = [
+  { x: 100, y: 100 },
+  { x: 200, y: 100 },
+  { x: 150, y: 200 }
+];
+
+canvas.polygon(points, "red", true);
+```
+
+## text(text, x, y, color, font = "12px Arial")
+
+Dibuja un texto en el lienzo en la posición `(x, y)` con el color y fuente especificados.
+
+```javascript
+canvas.text("Hola Mundo", 100, 100, "black", "20px Arial");
+```
+
+## image(image, x, y, width, height)
+
+Dibuja una imagen en el lienzo en la posición `(x, y)` con el ancho y alto especificados
+
+. El parámetro `image` puede ser un objeto `Image` o una URL de imagen.
+
+```javascript
+const image = new Image();
+image.src = "path/to/image.png";
+
+canvas.image(image, 100, 100, 200, 200);
+```
+
+## getImageData(x, y, width, height)
+
+Obtiene los datos de píxeles de una región rectangular específica en el lienzo. Los parámetros `x` e `y` especifican la esquina superior izquierda de la región, y `width` y `height` determinan sus dimensiones. Este método devuelve un objeto `ImageData` que contiene información sobre los píxeles.
+
+```javascript
+const imageData = canvas.getImageData(0, 0, 100, 100);
+console.log(imageData.data);  // Array de valores RGBA de los píxeles
+```
+
+## putImageData(imageData, x, y)
+
+Coloca los datos de píxeles de un objeto `ImageData` en el lienzo en la posición `(x, y)`.
+
+```javascript
+canvas.putImageData(imageData, 100, 100);
+```
