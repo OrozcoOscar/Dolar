@@ -373,9 +373,7 @@ binToText(['1101000', '1101111', '1101100', '1100001'])
 ```js
     $("#micaja").removeClass(".active")
 ```
-¡Por supuesto! Aquí tienes un ejemplo de cómo podría ser un archivo `README.md` para la clase `Canvas`:
 
-```markdown
 # Canvas Class
 
 La clase `Canvas` es una clase JavaScript que facilita la manipulación y el dibujo en un elemento `<canvas>` utilizando el contexto 2D.
