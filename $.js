@@ -622,7 +622,9 @@ class Canvas{
 	img(img,x,y,w,h,cutX=0,cutY=0,cutW=null,cutH=null,espX=1,espY=1){
 		(!cutW)?cutW=img.width:false;
 		(!cutH)?cutH=img.height:false;
-
+		(!w)?w=img.width:false;
+		(!h)?h=img.height:false;
+		
 		let ax = 0, ay = 0;
 		if(espX==-1) ax= -w;
 		if(espY==-1) ay= -h;
