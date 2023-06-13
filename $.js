@@ -125,6 +125,49 @@ function $(argument) {
 	else return undefined
 }
 /**
+ * Limita la frecuencia de ejecución de una función.
+ * @param {Function} callback - Función a ejecutar.
+ * @param {number} delay - Retraso en milisegundos.
+ * @returns {Function} - Función envuelta que aplica el throttle.
+ */
+function throttle(callback, delay) {
+  let lastExecution = 0;
+  let timeoutId;
+
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastExecution < delay) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastExecution = now;
+        callback.apply(this, args);
+      }, delay);
+    } else {
+      lastExecution = now;
+      callback.apply(this, args);
+    }
+  };
+}
+
+/**
+ * Retrasa la ejecución de una función después del último evento.
+ * @param {Function} callback - Función a ejecutar.
+ * @param {number} delay - Retraso en milisegundos.
+ * @returns {Function} - Función envuelta que aplica el debounce.
+ */
+function debounce(callback, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      callback.apply(this, args);
+    }, delay);
+  };
+}
+
+/**
      * Calcula la Distancia entre dos puntos 
      * @param p1 primer punto.
      * @param p2  segundo punto.
