@@ -71,6 +71,7 @@ const debouncedInput = debounce(handleInput, 300);
 
 input.addEventListener('input', debouncedInput);
 ```
+En este ejemplo, la función handleInput se ejecutará después de que no se produzcan eventos de input durante al menos 300 milisegundos. Si se produce un evento de input dentro de ese período, se reinicia el temporizador y se espera nuevamente.
 
 ## Función distanceBetweenPoints(p1, p2)
 
