@@ -27,6 +27,51 @@ const elemento = $("div");
 Si hay varios elementos que coinciden con el selector, la función `$` devolverá una instancia de la clase `obj` que contiene una colección de elementos.
 
 ------------------------------------------------------------------------------------------------
+# Throttle y Debounce
+
+Estas son dos funciones utilitarias para controlar la frecuencia de ejecución de funciones en respuesta a eventos.
+
+## Función throttle
+
+La función `throttle` permite limitar la frecuencia de ejecución de una función para evitar que se ejecute con demasiada frecuencia.
+
+- `callback`: La función que se desea ejecutar con throttle.
+- `delay`: El tiempo mínimo en milisegundos que debe transcurrir entre cada ejecución de la función.
+
+### Ejemplo
+
+```javascript
+function handleScroll() {
+  // Manejar el evento de scroll
+  // ...
+}
+
+const throttledScroll = throttle(handleScroll, 200);
+
+window.addEventListener('scroll', throttledScroll);
+```
+
+En este ejemplo, la función `handleScroll` se ejecutará como máximo cada 200 milisegundos en respuesta al evento de scroll. Si se produce un evento de scroll más frecuente, se ignorarán hasta que haya pasado el período de tiempo establecido.
+
+## Función debounce
+
+La función `debounce` permite retrasar la ejecución de una función hasta que no se produzcan eventos adicionales dentro de un período de tiempo determinado.
+- `callback`: La función que se desea ejecutar con debounce.
+- `delay`: El tiempo en milisegundos que se debe esperar después del último evento para ejecutar la función.
+
+### Ejemplo
+
+```javascript
+function handleInput() {
+  // Manejar el evento de input
+  // ...
+}
+
+const debouncedInput = debounce(handleInput, 300);
+
+input.addEventListener('input', debouncedInput);
+```
+
 ## Función distanceBetweenPoints(p1, p2)
 
 Calcula la distancia entre dos puntos en un plano cartesiano.
