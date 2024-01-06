@@ -2,10 +2,24 @@
 Biblioteca en js para facilitar el uso de Canvas y la gestión del Dom, también proporciona diferentes funciones.
 
 
-# cdn
+# Como se instala
+## Usando una CDN
+### cdn
 https://raw.githack.com/OrozcoOscar/Dolar/main/$.js
 
+```javascript
+import { $ } from 'https://raw.githack.com/OrozcoOscar/Dolar/main/$.js';
+const elemento = $("div");
+```
+## Usando NPM
 
+```
+npm i Dolar
+```
+```javascript
+import { $ } from '$';
+const elemento = $("div");
+```
 # Funciones
 Este repositorio contiene una colección de funciones útiles para realizar diferentes tareas en JavaScript.
 # Función $

@@ -1,13 +1,13 @@
 /**
 OrozcoOscar
-v4.14
-27/06/23
+v5
+06/01/24
 **/
 /**
  * Función para facilitar el manejo del DOM
  * @param {string} argument Selector Css (".micaja","#midiv","body",etc..)
  */
-function $(argument) {
+export function $(argument) {
 	class obj {
 		constructor(e) {
 			this.tag = e
@@ -130,7 +130,7 @@ function $(argument) {
  * @param {number} delay - Retraso en milisegundos.
  * @returns {Function} - Función envuelta que aplica el throttle.
  */
-function throttle(callback, delay) {
+export function throttle(callback, delay) {
 	let lastExecution = 0;
 	let timeoutId;
 
@@ -156,7 +156,7 @@ function throttle(callback, delay) {
  * @param {number} delay - Retraso en milisegundos.
  * @returns {Function} - Función envuelta que aplica el debounce.
  */
-function debounce(callback, delay) {
+export function debounce(callback, delay) {
 	let timeoutId;
 
 	return function (...args) {
@@ -172,7 +172,7 @@ function debounce(callback, delay) {
 	 * @param p1 primer punto.
 	 * @param p2  segundo punto.
 	 */
-function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
+export function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
 	return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
 }
 /**
@@ -182,13 +182,13 @@ function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
  * @param {any} r Relleno
  * @returns Una Matriz
  */
-function createMatriz(f, c, r = 0) { let m = [f]; for (var i = 0; i < f; i++) { m[i] = []; for (var e = 0; e < c; e++) { m[i][e] = r; } } return m; }
-function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min; }//no incluye al max
+export function createMatriz(f, c, r = 0) { let m = [f]; for (var i = 0; i < f; i++) { m[i] = []; for (var e = 0; e < c; e++) { m[i][e] = r; } } return m; }
+export function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min; }//no incluye al max
 /**
  * 
  * @returns {Json} Retorna un json con los parámetros obtenidos de la url o método GET
  */
-function Get() { let cont = window.location.search; if (cont.indexOf("=") > -1) { let json = "{"; let get = cont.replace("?", ""); get = get.split("&"); get.map((e, i) => { e = e.split("="); if (i < get.length - 1) json += "\"" + e[0] + "\":\"" + e[1].replace(/%20/g, " ") + "\","; else json += "\"" + e[0] + "\":\"" + e[1].replace(/%20/g, " ") + "\"" + "}"; }); return JSON.parse(json); } else return null; }
+export function Get() { let cont = window.location.search; if (cont.indexOf("=") > -1) { let json = "{"; let get = cont.replace("?", ""); get = get.split("&"); get.map((e, i) => { e = e.split("="); if (i < get.length - 1) json += "\"" + e[0] + "\":\"" + e[1].replace(/%20/g, " ") + "\","; else json += "\"" + e[0] + "\":\"" + e[1].replace(/%20/g, " ") + "\"" + "}"; }); return JSON.parse(json); } else return null; }
 /**
 	 * Resolver Ecuaciones lineales 
 	 * @param {Array} M Matriz de coeficientes.
@@ -198,7 +198,7 @@ function Get() { let cont = window.location.search; if (cont.indexOf("=") > -1) 
 	 * Ej: M=[[2,1],[5,2]] equality=[10,10]
 	 *  es equivalente  a 2x+y=10 ; 5x+2y=10
 	 */
-function solveEquations(M = [[]], equality = []) {
+export function solveEquations(M = [[]], equality = []) {
 	let detM = det(M)
 	function remplazarCol(M, V, c) {
 		let A = M.map(e => e.map(i => i))//Crea una copia para matar el puntero
@@ -226,7 +226,7 @@ function solveEquations(M = [[]], equality = []) {
 	 * @param {Object} p1 primer punto 
 	 * @param {Object} p2  segundo punto 
 	 */
-function calcularAnguloCuadrante(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
+export function calcularAnguloCuadrante(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
 	let a = angleSlope(slope(p1, p2))
 	if ((p2.x <= p1.x && p2.y <= p1.y) || (p2.x < p1.x && p2.y >= p1.y)) {
 		a = Math.PI + a
@@ -240,21 +240,21 @@ function calcularAnguloCuadrante(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
 * @param {Object} p1 primer punto 
 * @param {Object} p2 segundo punto 
 */
-function slope(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
+export function slope(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
 	return (p2.y - p1.y) / (p2.x - p1.x)
 }
 /**
  * Calcula el angulo en Radianes de una pendiente
  * @param {Number} m Pendiente
  */
-function angleSlope(m) {
+export function angleSlope(m) {
 	return Math.atan(m)
 }
 /**
 	 * Calcula el determinante de una matriz 
 	 * @param {Array} M Matriz .
 	 */
-function det(M) {
+export function det(M) {
 	let n = M.length
 	let aux = M
 	let d = 0
@@ -290,47 +290,47 @@ function det(M) {
  * Convierte grados en Radianes 
  * @param {Number} g Grados.
  */
-const toRad = (g) => g * Math.PI / 180
+export const toRad = (g) => g * Math.PI / 180
 /**
  * Convierte radianes en Grados 
  * @param {Number} r Radianes.
  */
-const toGrad = (r) => r * 180 / Math.PI
+export const toGrad = (r) => r * 180 / Math.PI
 /**
  * Convierte binario en Ascii
  * @param {Array} bin Array de Números binario.
  */
-const binToASCII = (bin = []) => bin.map(b => parseInt(b, 2).toString(10))
+export const binToASCII = (bin = []) => bin.map(b => parseInt(b, 2).toString(10))
 /**
  * Convierte números en binario
  * @param {Number} num Numero decimal.
  */
-const numToBin = (num) => num.toString(2)
+export const numToBin = (num) => num.toString(2)
 /**
  * Convierte números ascii en texto
  * @param {Array} ascii Array de números ascii.
  */
-const asciiToText = (ascii) => String.fromCharCode(...ascii)
+export const asciiToText = (ascii) => String.fromCharCode(...ascii)
 /**
  * Convierte texto en  ascii
  * @param {String} text Texto a convertir.
  */
-const textToAscii = (text) => text.split("").map(c => c.charCodeAt(0))
+export const textToAscii = (text) => text.split("").map(c => c.charCodeAt(0))
 /**
  * Convierte texto en  binario
  * @param {String} text Texto a convertir.
  */
-const textToBin = (text) => textToAscii(text).map(c => numToBin(c))
+export const textToBin = (text) => textToAscii(text).map(c => numToBin(c))
 /**
  * Convierte binario en  texto
  * @param {Array} bin array de binarios.
  */
-const binToText = (bin) => asciiToText(binToASCII(bin))
+export const binToText = (bin) => asciiToText(binToASCII(bin))
 /**
  * Convierte binario en decimal
  * @param {String} bin numero binario a convertir.
  */
-const binToNum = (bin) => parseInt(bin, 2);
+export const binToNum = (bin) => parseInt(bin, 2);
 /**
 	 * mueve un elemento html;
 	 * @param obj:String("selector del elemento (.element,#element o etiqueta html)")
@@ -338,7 +338,7 @@ const binToNum = (bin) => parseInt(bin, 2);
 	 * @param y
 	 * @param type tipo de posición (relative,absolute)
 */
-function moveTo(obj, x, y, type = "relative") {
+export function moveTo(obj, x, y, type = "relative") {
 	obj = document.querySelectorAll(obj)
 	obj.forEach((e) => {
 		e.style.position = type
@@ -351,7 +351,7 @@ function moveTo(obj, x, y, type = "relative") {
 	 * Muestra los fps;
 	 * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
 */
-class GESTOR {
+export class GESTOR {
 	constructor(tag = "") {
 		this.fin = 0; // Fin del ciclo
 		this.aps = 0; // Actualizaciones por segundo
@@ -386,7 +386,7 @@ class GESTOR {
 	 * @param obj  new Canvas("#mycanvas").
 	 * @param obj  new Canvas(".mycanvas").
 	 */
-class Canvas {
+export class Canvas {
 	constructor(obj = "canvas") {
 		this.tag = $(obj).tag;
 		this.$ = $(obj)
@@ -739,7 +739,7 @@ class Canvas {
  * @param {number} c radio circunferencia 2
  * @return "[{x,y},{x,y}]" retorna un vector de dos puntos 
  */
-function intersectionCircles(h, k, r, a, b, c) {
+export function intersectionCircles(h, k, r, a, b, c) {
 	let w = -1 * h ** 2 + a ** 2 + b ** 2 - c ** 2 - k ** 2 + r ** 2;
 	let t = -2 * b + 2 * k;
 	let z = 2 * (-h + a);
@@ -757,7 +757,7 @@ function intersectionCircles(h, k, r, a, b, c) {
 /**
  * Defina un Vector posee métodos para operaciones
  */
-class Vector {
+export class Vector {
 	constructor(x, y, mod, ang) {
 		this.x = x
 		this.y = y
