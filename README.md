@@ -18,7 +18,10 @@ npm i dolar-js
 ```
 ```javascript
 import { $ } from 'dolar-js';
-const elemento = $("div");
+
+useEffect(()=>{
+  const elemento = $("div");
+},[])
 ```
 # Funciones
 Este repositorio contiene una colección de funciones útiles para realizar diferentes tareas en JavaScript.
@@ -876,7 +879,7 @@ Ejemplo de uso:
 canvas.fill();
 ```
 
-### event(e, f)
+### on(e, f)
 
 Añade eventos al lienzo.
 
@@ -886,9 +889,9 @@ Añade eventos al lienzo.
 
 Ejemplo de uso:
 ```javascript
-canvas.event("click", myFunction);
+canvas.on("click", myFunction);
 ```
-### removeEvent(e, f)
+### off(e, f)
 
 Quita eventos del lienzo.
 
@@ -898,7 +901,7 @@ Quita eventos del lienzo.
 
 Ejemplo de uso:
 ```javascript
-canvas.removeEvent("click", myFunction);
+canvas.off("click", myFunction);
 ```
 
 ### img(img, x, y, w, h, cutX, cutY, cutW, cutH, espX, espY)
