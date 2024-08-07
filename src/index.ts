@@ -1,10 +1,10 @@
 /**
 OrozcoOscar
-v5
-06/01/24
+v6
+07/08/24
 **/
 
-import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsElementsTypes, ResourceElements } from "./dolar-js";
+import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsElementsTypes, ResourceElements } from "./type.d"
 
 /**
  * Función para facilitar el manejo del DOM
@@ -13,7 +13,7 @@ import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsEleme
 export function $(argument: string) {
     class obj {
         tag: $ObjType
-        _current: obj[]
+        _current: obj[] = []
         constructor(e: $ObjType) {
             this.tag = e
             if (Array.isArray(this.tag)) {
@@ -21,8 +21,8 @@ export function $(argument: string) {
                     this._current = []
                     this.tag.forEach(t => this._current.push(new obj(t)))
                 }
-                else {
-                    this.tag = e[0]
+                else if (this.tag.length == 1) {
+                    this.tag = this.tag[0]
                 }
             } else {
                 this.tag = e
@@ -170,7 +170,7 @@ export function $(argument: string) {
          * Inserta Css a uno o varios elementos HTML
          * @param {Json} obj estilos Css
          */
-        css(obj: { [key: string]: string | number }) {
+        css(obj: CSSStyleDeclaration) {
             if (Array.isArray(this.tag)) {
                 for (let i = 0; i < this.tag.length; i++) {
                     for (let p in obj) {
@@ -228,7 +228,7 @@ export function throttle(callback: CallbackType, delay: number): CallbackType {
     let lastExecution = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
 
-    return function (...args: any[]) {
+    return function (this: any, ...args: any[]) {
         const now = Date.now();
 
         if (now - lastExecution < delay) {
@@ -253,7 +253,7 @@ export function throttle(callback: CallbackType, delay: number): CallbackType {
 export function debounce(callback: CallbackType, delay: number): CallbackType {
     let timeoutId: ReturnType<typeof setTimeout>;
 
-    return function (...args: any[]) {
+    return function (this: any, ...args: any[]) {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
             callback.apply(this, args);
@@ -634,16 +634,18 @@ export class Canvas {
                     this.ctx.stroke();
 
                 } else {
-                    this.ctx.beginPath()
-                    this.ctx.fillStyle = c;
-                    this.ctx.strokeStyle = c;
-                    this.ctx.arc(x + r[0], y + r[0], r[0], toRad(180), toRad(-90));
-                    this.ctx.arc(x + w - r[1], y + r[1], r[1], toRad(-90), toRad(0));
-                    this.ctx.arc(x + w - r[2], y + h - r[2], r[2], toRad(0), toRad(90));
-                    this.ctx.arc(x + r[3], y + h - r[3], r[3], toRad(90), toRad(180));
-                    this.ctx.moveTo(x, y + r[0]);
-                    this.ctx.lineTo(x, y + h - r[3]);
-                    this.ctx.stroke();
+                    if (Array.isArray(r)) {
+                        this.ctx.beginPath()
+                        this.ctx.fillStyle = c;
+                        this.ctx.strokeStyle = c;
+                        this.ctx.arc(x + r[0], y + r[0], r[0], toRad(180), toRad(-90));
+                        this.ctx.arc(x + w - r[1], y + r[1], r[1], toRad(-90), toRad(0));
+                        this.ctx.arc(x + w - r[2], y + h - r[2], r[2], toRad(0), toRad(90));
+                        this.ctx.arc(x + r[3], y + h - r[3], r[3], toRad(90), toRad(180));
+                        this.ctx.moveTo(x, y + r[0]);
+                        this.ctx.lineTo(x, y + h - r[3]);
+                        this.ctx.stroke();
+                    }
                 }
                 if (f) this.ctx.fill();
             } else {
@@ -825,7 +827,7 @@ export class Canvas {
         this.tag.height = innerHeight;
         this.width = this.tag.width
         this.height = this.tag.height
-        $("body")?.css({ margin: 0, padding: 0, overflow: "hidden" });
+        $("body")?.css({ margin: '0', padding: '0', overflow: "hidden" } as CSSStyleDeclaration);
     }
     /**
      * Añade eventos al canvas ; 
@@ -911,14 +913,14 @@ export class Canvas {
      */
     createRadialGradient(centerX = 0, centerY = 0, innerRadius = 0, outerRadius = 0, colorStops: { offset: number, color: string }[] = []) {
         const gradient = this.ctx ? this.ctx.createRadialGradient(centerX, centerY, innerRadius, centerX, centerY, outerRadius) : null;
-    
+
         if (gradient) {
             for (let i = 0; i < colorStops.length; i++) {
                 const { offset, color } = colorStops[i];
                 gradient.addColorStop(offset, color);
             }
         }
-    
+
         return gradient;
     }
 }

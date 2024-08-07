@@ -2,8 +2,11 @@
   "name": "dolar-js",
   "version": "1.0.1",
   "description": "Biblioteca en js para facilitar el uso de Canvas y la gestión del Dom, también proporciona diferentes funciones.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +22,9 @@
       "import": "./index.js"
     }
   },
+  "files": [
+    "dist/**/*"
+  ],
   "bugs": {
     "url": "https://github.com/OrozcoOscar/Dolar/issues"
   },
