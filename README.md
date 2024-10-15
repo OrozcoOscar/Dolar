@@ -5,10 +5,10 @@ Biblioteca en js para facilitar el uso de Canvas y la gestión del Dom, también
 # Como se instala
 ## Usando una CDN
 ### cdn
-https://raw.githack.com/OrozcoOscar/Dolar/main/index.js
+[https://raw.githack.com/OrozcoOscar/Dolar/main/index.ts](https://raw.githubusercontent.com/OrozcoOscar/Dolar/main/src/index.ts)
 
 ```javascript
-import { $ } from 'https://raw.githack.com/OrozcoOscar/Dolar/main/index.js';
+import { $ } from 'https://raw.githubusercontent.com/OrozcoOscar/Dolar/main/src/index.ts';
 const elemento = $("div");
 ```
 ## Usando NPM
