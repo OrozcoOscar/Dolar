@@ -4,7 +4,7 @@ v6
 07/08/24
 **/
 
-import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsElementsTypes, ResourceElements } from "./type.d"
+import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsElementsTypes, ResourceElements } from "./types"
 
 /**
  * Función para facilitar el manejo del DOM
@@ -1033,3 +1033,33 @@ export class Vector {
         return pp;
     }
 }
+
+const DolarJs = {
+    throttle,
+    debounce,
+    distanceBetweenPoints,
+    createMatriz,
+    Random,
+    Get,
+    solveEquations,
+    toRad,
+    toGrad,
+    binToASCII,
+    numToBin,
+    asciiToText,
+    textToAscii,
+    textToBin,
+    binToText,
+    binToNum,
+    moveTo,
+    GESTOR,
+    Canvas,
+    intersectionCircles,
+    Vector,
+    angleSlope,
+    slope,
+    det,
+    $
+}
+
+export default DolarJs;
