@@ -1,35 +1,21 @@
-"use strict";
 /**
 OrozcoOscar
 v6
 07/08/24
 **/
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Función para facilitar el manejo del DOM
  * @param {string} argument Selector Css (".micaja","#midiv","body",etc..)
  */
 function $(argument) {
-    var obj = /** @class */ (function () {
-        function obj(e) {
-            var _this = this;
+    class obj {
+        constructor(e) {
             this._current = [];
             this.tag = e;
             if (Array.isArray(this.tag)) {
                 if (this.tag.length > 1) {
                     this._current = [];
-                    this.tag.forEach(function (t) { return _this._current.push(new obj(t)); });
+                    this.tag.forEach(t => this._current.push(new obj(t)));
                 }
                 else if (this.tag.length == 1) {
                     this.tag = this.tag[0];
@@ -44,15 +30,15 @@ function $(argument) {
          * @param {string|undefined} e Contenido a modificar
          * @returns innerHTML
          */
-        obj.prototype.html = function (e) {
+        html(e) {
             if (Array.isArray(this.tag)) {
                 if (!e) {
-                    var r_1 = [];
-                    this.tag.forEach(function (t) { return r_1.push(t.innerHTML); });
-                    return r_1;
+                    let r = [];
+                    this.tag.forEach(t => r.push(t.innerHTML));
+                    return r;
                 }
                 else {
-                    this.tag.forEach(function (t) { return t.innerHTML = e; });
+                    this.tag.forEach(t => t.innerHTML = e);
                 }
             }
             else {
@@ -61,182 +47,181 @@ function $(argument) {
                 else
                     return this.tag.innerHTML;
             }
-        };
+        }
         /**
          * Añade eventos a uno o mas elementos HTML;
          * @param {string} e Nombre del evento "click" ,"key" etc
          * @param {function} f función que ejecuta el evento $(selectorCss).event("click",myFuncion)
          * la función recibe como parámetro los datos del evento
          */
-        obj.prototype.event = function (e, f) {
+        event(e, f) {
             if (Array.isArray(this.tag)) {
-                for (var i = 0; i < this.tag.length; i++) {
+                for (let i = 0; i < this.tag.length; i++) {
                     this.tag[i].addEventListener(e, f);
                 }
             }
             else {
                 this.tag.addEventListener(e, f);
             }
-        };
+        }
         /**
          * Quita eventos a uno o mas elementos HTML
          * @param {string} e Nombre del evento "click" ,"key" etc
          * @param {function} f función que ejecuta el evento $(selectorCss).removeEvent("click",myFuncion)
          */
-        obj.prototype.removeEvent = function (e, f) {
+        removeEvent(e, f) {
             if (Array.isArray(this.tag)) {
-                for (var n_1 = 0; n_1 < this.tag.length; n_1++) {
-                    this.tag[n_1].removeEventListener(e, f);
+                for (let n = 0; n < this.tag.length; n++) {
+                    this.tag[n].removeEventListener(e, f);
                 }
             }
             else {
                 this.tag.removeEventListener(e, f);
             }
-        };
+        }
         /**
          * Retorna o modifica el value de un elemento HTML
          * @param {string} e
          * @returns value
          */
-        obj.prototype.val = function (e) {
+        val(e) {
             if (Array.isArray(this.tag)) {
                 if (!e) {
-                    var r_2 = [];
-                    this.tag.forEach(function (t) {
-                        var element = t;
-                        r_2.push(element.value);
+                    let r = [];
+                    this.tag.forEach((t) => {
+                        let element = t;
+                        r.push(element.value);
                     });
-                    return r_2;
+                    return r;
                 }
                 else {
-                    this.tag.forEach(function (t) {
-                        var element = t;
+                    this.tag.forEach(t => {
+                        let element = t;
                         element.value = e;
                     });
                 }
             }
             else {
-                var element = this.tag;
+                let element = this.tag;
                 if (e)
                     element.value = e;
                 else
                     return element.value;
             }
-        };
+        }
         /**
          * Retorna o modifica el src de un elemento HTML
          * @param {string} e
          * @returns src
          */
-        obj.prototype.src = function (e) {
+        src(e) {
             if (Array.isArray(this.tag)) {
                 if (!e) {
-                    var r_3 = [];
-                    this.tag.forEach(function (t) {
-                        var element = t;
-                        r_3.push(element.src);
+                    let r = [];
+                    this.tag.forEach((t) => {
+                        let element = t;
+                        r.push(element.src);
                     });
-                    return r_3;
+                    return r;
                 }
                 else {
-                    this.tag.forEach(function (t) {
-                        var element = t;
+                    this.tag.forEach(t => {
+                        let element = t;
                         element.src = e;
                     });
                 }
             }
             else {
-                var element = this.tag;
+                let element = this.tag;
                 if (e)
                     element.src = e;
                 else
                     return element.src;
             }
-        };
+        }
         /**
          * Inserta Atributos a uno o varios elementos HTML
          * @param {string} e Nombre del Atributo
          * @param {string} t Valor del Atributo
          */
-        obj.prototype.attr = function (e, t) {
+        attr(e, t) {
             if (Array.isArray(this.tag)) {
-                for (var n_2 = 0; n_2 < this.tag.length; n_2++) {
-                    this._current[n_2].attr(e, t);
+                for (let n = 0; n < this.tag.length; n++) {
+                    this._current[n].attr(e, t);
                 }
             }
             else {
                 this.tag.setAttribute(e, t);
             }
-        };
+        }
         /**
          * Inserta contenido al final a uno o varios elementos HTML
          * @param {string} e contenido
          */
-        obj.prototype.append = function (e) {
+        append(e) {
             try {
                 if (Array.isArray(this.tag)) {
-                    for (var t_1 = 0; t_1 < this.tag.length; t_1++) {
-                        var element = this.tag[t_1];
+                    for (let t = 0; t < this.tag.length; t++) {
+                        let element = this.tag[t];
                         element.innerHTML += e;
                     }
                 }
                 else {
-                    var element = this.tag;
+                    let element = this.tag;
                     element.innerHTML += e;
                 }
             }
             catch (e) { }
-        };
+        }
         /**
          * Inserta Css a uno o varios elementos HTML
          * @param {Json} obj estilos Css
          */
-        obj.prototype.css = function (obj) {
+        css(obj) {
             if (Array.isArray(this.tag)) {
-                for (var i = 0; i < this.tag.length; i++) {
-                    for (var p in obj) {
+                for (let i = 0; i < this.tag.length; i++) {
+                    for (let p in obj) {
                         this.tag[i].style[p] = obj[p];
                     }
                 }
             }
             else {
-                for (var p in obj) {
+                for (let p in obj) {
                     this.tag.style[p] = obj[p];
                 }
             }
-        };
+        }
         /**
          * Añade o quita una clase a uno o varios elementos HTML
          * @param {string} e nombre de la clase
          */
-        obj.prototype.toggleClass = function (e) {
+        toggleClass(e) {
             if (Array.isArray(this.tag)) {
-                for (var t_2 = 0; t_2 < this.tag.length; t_2++) {
-                    this.tag[t_2].classList.toggle(e);
+                for (let t = 0; t < this.tag.length; t++) {
+                    this.tag[t].classList.toggle(e);
                 }
             }
             else {
                 this.tag.classList.toggle(e);
             }
-        };
+        }
         /**
          * Quita clase a uno o varios elementos HTML
          * @param {string} e nombre de la clase
          */
-        obj.prototype.removeClass = function (e) {
+        removeClass(e) {
             if (Array.isArray(this.tag)) {
-                for (var t_3 = 0; t_3 < this.tag.length; t_3++) {
-                    this.tag[t_3].classList.remove(e);
+                for (let t = 0; t < this.tag.length; t++) {
+                    this.tag[t].classList.remove(e);
                 }
             }
             else {
                 this.tag.classList.remove(e);
             }
-        };
-        return obj;
-    }());
-    var n = [];
-    var tag = document.querySelectorAll(argument);
+        }
+    }
+    let n = [];
+    let tag = document.querySelectorAll(argument);
     if (tag.length > 1)
         for (var t = 0; t < tag.length; t++)
             n.push(tag[t]);
@@ -254,20 +239,15 @@ function $(argument) {
  * @returns {Function} - Función envuelta que aplica el throttle.
  */
 function throttle(callback, delay) {
-    var lastExecution = 0;
-    var timeoutId;
-    return function () {
-        var _this = this;
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var now = Date.now();
+    let lastExecution = 0;
+    let timeoutId;
+    return function (...args) {
+        const now = Date.now();
         if (now - lastExecution < delay) {
             clearTimeout(timeoutId);
-            timeoutId = setTimeout(function () {
+            timeoutId = setTimeout(() => {
                 lastExecution = now;
-                callback.apply(_this, args);
+                callback.apply(this, args);
             }, delay);
         }
         else {
@@ -283,16 +263,11 @@ function throttle(callback, delay) {
  * @returns {Function} - Función envuelta que aplica el debounce.
  */
 function debounce(callback, delay) {
-    var timeoutId;
-    return function () {
-        var _this = this;
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
+    let timeoutId;
+    return function (...args) {
         clearTimeout(timeoutId);
-        timeoutId = setTimeout(function () {
-            callback.apply(_this, args);
+        timeoutId = setTimeout(() => {
+            callback.apply(this, args);
         }, delay);
     };
 }
@@ -301,9 +276,7 @@ function debounce(callback, delay) {
      * @param p1 primer punto.
      * @param p2  segundo punto.
      */
-function distanceBetweenPoints(p1, p2) {
-    if (p1 === void 0) { p1 = { x: 0, y: 0 }; }
-    if (p2 === void 0) { p2 = { x: 0, y: 0 }; }
+function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
     return Math.sqrt(Math.pow((p1.x - p2.x), 2) + Math.pow((p1.y - p2.y), 2));
 }
 /**
@@ -313,9 +286,8 @@ function distanceBetweenPoints(p1, p2) {
  * @param {any} r Relleno
  * @returns Una Matriz
  */
-function createMatriz(f, c, r) {
-    if (r === void 0) { r = 0; }
-    var m = [];
+function createMatriz(f, c, r = 0) {
+    let m = [];
     for (var i = 0; i < f; i++) {
         m[i] = [];
         for (var e = 0; e < c; e++) {
@@ -334,9 +306,9 @@ function Random(min, max) { return Math.floor(Math.random() * (max - min)) + min
  * @returns {Object} - Objeto JSON con los parámetros obtenidos.
  */
 function Get() {
-    var searchParams = new URLSearchParams(window.location.search);
-    var params = {};
-    searchParams.forEach(function (value, key) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const params = {};
+    searchParams.forEach((value, key) => {
         params[key] = value.replace(/%20/g, " ");
     });
     return Object.keys(params).length > 0 ? params : null;
@@ -350,21 +322,19 @@ function Get() {
      * Ej: M=[[2,1],[5,2]] equality=[10,10]
      *  es equivalente  a 2x+y=10 ; 5x+2y=10
      */
-function solveEquations(M, equality) {
-    if (M === void 0) { M = [[]]; }
-    if (equality === void 0) { equality = []; }
-    var detM = det(M);
+function solveEquations(M = [[]], equality = []) {
+    let detM = det(M);
     function remplazarCol(M, V, c) {
-        var A = M.map(function (e) { return e.map(function (i) { return i; }); }); // Crea una copia para matar el puntero
-        var n = A.length;
-        for (var i = 0; i < n; i++) {
+        let A = M.map(e => e.map(i => i)); // Crea una copia para matar el puntero
+        let n = A.length;
+        for (let i = 0; i < n; i++) {
             A[i][c] = V[i];
         }
         return A;
     }
-    return equality.map(function (_, i) {
-        var a = det(remplazarCol(M, equality, i));
-        var b = detM;
+    return equality.map((_, i) => {
+        let a = det(remplazarCol(M, equality, i));
+        let b = detM;
         if (b == 0) {
             return null;
         }
@@ -382,10 +352,8 @@ function solveEquations(M, equality) {
  * @param {Object} p2 Segundo punto.
  * @returns {number} Ángulo en radianes.
  */
-function calcularAnguloCuadrante(p1, p2) {
-    if (p1 === void 0) { p1 = { x: 0, y: 0 }; }
-    if (p2 === void 0) { p2 = { x: 0, y: 0 }; }
-    var a = angleSlope(slope(p1, p2));
+function calcularAnguloCuadrante(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
+    let a = angleSlope(slope(p1, p2));
     if ((p2.x <= p1.x && p2.y <= p1.y) || (p2.x < p1.x && p2.y >= p1.y)) {
         a = Math.PI + a;
     }
@@ -405,9 +373,7 @@ function calcularAnguloCuadrante(p1, p2) {
  * @param {Object} p2 segundo punto
  * @returns {number} Pendiente
  */
-function slope(p1, p2) {
-    if (p1 === void 0) { p1 = { x: 0, y: 0 }; }
-    if (p2 === void 0) { p2 = { x: 0, y: 0 }; }
+function slope(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
     return (p2.y - p1.y) / (p2.x - p1.x);
 }
 /**
@@ -424,18 +390,18 @@ function angleSlope(m) {
  * @returns {number} Determinante
  */
 function det(M) {
-    var n = M.length;
-    var aux = M;
-    var d = 0;
+    let n = M.length;
+    let aux = M;
+    let d = 0;
     function reduce(x, y, M) {
-        var n = M.length;
-        var aux = [];
-        for (var i = 0; i < n - 1; i++) {
+        let n = M.length;
+        let aux = [];
+        for (let i = 0; i < n - 1; i++) {
             aux.push([]);
         }
-        for (var i = 0, a = 0; i < n; i++) {
+        for (let i = 0, a = 0; i < n; i++) {
             if (i)
-                for (var e = 0; e < n; e++) {
+                for (let e = 0; e < n; e++) {
                     if (i != y && e != x) {
                         aux[a].push(M[i][e]);
                         if (aux[a].length == n - 1) {
@@ -448,8 +414,8 @@ function det(M) {
     }
     if (n == 1)
         return M[0][0];
-    for (var i = 0; i < n; i++) {
-        var coe = M[0][i];
+    for (let i = 0; i < n; i++) {
+        let coe = M[0][i];
         if (i % 2 != 0)
             coe *= -1;
         d += coe * det(reduce(i, 0, aux));
@@ -460,50 +426,47 @@ function det(M) {
  * Convierte grados en Radianes
  * @param {Number} g Grados.
  */
-var toRad = function (g) { return g * Math.PI / 180; };
+const toRad = (g) => g * Math.PI / 180;
 /**
  * Convierte radianes en Grados
  * @param {Number} r Radianes.
  */
-var toGrad = function (r) { return r * 180 / Math.PI; };
+const toGrad = (r) => r * 180 / Math.PI;
 /**
  * Convierte binario en Ascii
  * @param {Array} bin Array de Números binario.
  */
-var binToASCII = function (bin) {
-    if (bin === void 0) { bin = []; }
-    return bin.map(function (b) { return parseInt(parseInt(b.toString(), 2).toString(10)); });
-};
+const binToASCII = (bin = []) => bin.map(b => parseInt(parseInt(b.toString(), 2).toString(10)));
 /**
  * Convierte números en binario
  * @param {Number} num Numero decimal.
  */
-var numToBin = function (num) { return num.toString(2); };
+const numToBin = (num) => num.toString(2);
 /**
  * Convierte números ascii en texto
  * @param {Array} ascii Array de números ascii.
  */
-var asciiToText = function (ascii) { return String.fromCharCode.apply(String, ascii); };
+const asciiToText = (ascii) => String.fromCharCode(...ascii);
 /**
  * Convierte texto en  ascii
  * @param {String} text Texto a convertir.
  */
-var textToAscii = function (text) { return text.split("").map(function (c) { return c.charCodeAt(0); }); };
+const textToAscii = (text) => text.split("").map(c => c.charCodeAt(0));
 /**
  * Convierte texto en  binario
  * @param {String} text Texto a convertir.
  */
-var textToBin = function (text) { return textToAscii(text).map(function (c) { return numToBin(c); }); };
+const textToBin = (text) => textToAscii(text).map(c => numToBin(c));
 /**
  * Convierte binario en  texto
  * @param {Array} bin array de binarios.
  */
-var binToText = function (bin) { return asciiToText(binToASCII(bin)); };
+const binToText = (bin) => asciiToText(binToASCII(bin));
 /**
  * Convierte binario en decimal
  * @param {String} bin numero binario a convertir.
  */
-var binToNum = function (bin) { return parseInt(bin, 2); };
+const binToNum = (bin) => parseInt(bin, 2);
 /**
      * mueve un elemento html;
      * @param obj:String("selector del elemento (.element,#element o etiqueta html)")
@@ -511,12 +474,11 @@ var binToNum = function (bin) { return parseInt(bin, 2); };
      * @param y
      * @param type tipo de posición (relative,absolute)
 */
-function moveTo(obj, x, y, type) {
-    if (type === void 0) { type = "relative"; }
+function moveTo(obj, x, y, type = "relative") {
     if (typeof obj === 'string') {
         obj = document.querySelectorAll(obj);
     }
-    obj.forEach(function (e) {
+    obj.forEach((e) => {
         e.style.position = type;
         e.style.left = x + "px";
         e.style.top = y + "px";
@@ -526,21 +488,23 @@ function moveTo(obj, x, y, type) {
      * Muestra los fps;
      * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
 */
-var GESTOR = /** @class */ (function () {
-    function GESTOR(tag) {
-        if (tag === void 0) { tag = ""; }
-        var _this = this;
-        this.start = function (tiempo) {
-            _this.aps++;
-            _this.fps++;
-            var diferencia = tiempo - _this.fin;
+class GESTOR {
+    constructor(tag = "") {
+        this.start = (tiempo) => {
+            this.aps++;
+            this.fps++;
+            var diferencia = tiempo - this.fin;
             if (diferencia > 999) {
-                if (_this.outputElement) {
-                    _this.outputElement.innerHTML = "\n        Tiempo: ".concat(tiempo, "<br>\n        APS: ").concat(_this.aps, "<br>\n        FPS: ").concat(_this.fps, "<br>\n      ");
+                if (this.outputElement) {
+                    this.outputElement.innerHTML = `
+        Tiempo: ${tiempo}<br>
+        APS: ${this.aps}<br>
+        FPS: ${this.fps}<br>
+      `;
                 }
-                _this.fin = tiempo;
-                _this.fps = 0;
-                _this.aps = 0;
+                this.fin = tiempo;
+                this.fps = 0;
+                this.aps = 0;
             }
         };
         this.fin = 0;
@@ -548,8 +512,7 @@ var GESTOR = /** @class */ (function () {
         this.fps = 0;
         this.outputElement = document.querySelector(tag);
     }
-    return GESTOR;
-}());
+}
 /**
      * Prepara un Canvas
      * new Canvas()  o new Canvas("#mycanvas")
@@ -558,9 +521,8 @@ var GESTOR = /** @class */ (function () {
      * @param obj  new Canvas("#mycanvas").
      * @param obj  new Canvas(".mycanvas").
      */
-var Canvas = /** @class */ (function () {
-    function Canvas(obj) {
-        if (obj === void 0) { obj = "canvas"; }
+class Canvas {
+    constructor(obj = "canvas") {
         this.tag = document.querySelector(obj);
         this.$ = $(obj);
         this.width = this.tag.width;
@@ -573,7 +535,7 @@ var Canvas = /** @class */ (function () {
      * Limpia el canvas
      * @param {Array} n Array de 3 posiciones [r,g,b] donde r,g,b son números entre 0 y 255
      */
-    Canvas.prototype.clear = function (n) {
+    clear(n) {
         if (n) {
             this.rect(0, 0, this.tag.width, this.tag.height, "rgb(" + n + ")", true);
         }
@@ -582,26 +544,26 @@ var Canvas = /** @class */ (function () {
                 this.ctx.clearRect(0, 0, this.tag.width, this.tag.height);
             }
         }
-    };
+    }
     /**
      * Guarda el estado actual del contexto de dibujo
      */
-    Canvas.prototype.save = function () {
+    save() {
         if (this.ctx) {
             this.ctx.save();
         }
-    };
+    }
     /**
      * Restaura el último estado guardado en la pila del contexto de dibujo
      */
-    Canvas.prototype.restore = function () {
+    restore() {
         if (this.ctx) {
             this.ctx.restore();
         }
-    };
-    Canvas.prototype.getCanvas = function () {
+    }
+    getCanvas() {
         return $("canvas");
-    };
+    }
     /**
      * Pinta un poligono de n lados
      * @param {number} x Posición en x
@@ -611,20 +573,17 @@ var Canvas = /** @class */ (function () {
      * @param {number|undefined} angulo Angulo en grados
      * @param {boolean} f Relleno o no relleno por defecto esta en false
      */
-    Canvas.prototype.polygon = function (x, y, n, radio, angulo, c, f) {
-        if (angulo === void 0) { angulo = 90 + 180; }
-        if (c === void 0) { c = ""; }
-        if (f === void 0) { f = false; }
-        var incremento = 360 / n;
-        var vx = [], vy = [];
-        var radians;
+    polygon(x, y, n, radio, angulo = 90 + 180, c = "", f = false) {
+        let incremento = 360 / n;
+        let vx = [], vy = [];
+        let radians;
         if (angulo == undefined) {
             angulo = 90 + 180;
             if (n % 2 == 0) {
                 angulo += incremento / 2;
             }
         }
-        for (var i = 0; i < n; i++) {
+        for (let i = 0; i < n; i++) {
             radians = toRad(angulo);
             vx[i] = x + radio * Math.cos(radians);
             vy[i] = y + radio * Math.sin(radians);
@@ -635,7 +594,7 @@ var Canvas = /** @class */ (function () {
             this.ctx.fillStyle = c;
             this.ctx.strokeStyle = c;
             this.ctx.moveTo(vx[0], vy[0]);
-            for (var i = 1; i < vx.length; i++) {
+            for (let i = 1; i < vx.length; i++) {
                 this.ctx.lineTo(vx[i], vy[i]);
             }
             this.ctx.closePath();
@@ -643,7 +602,7 @@ var Canvas = /** @class */ (function () {
             if (f)
                 this.ctx.fill();
         }
-    };
+    }
     /** Pinta un rectángulo
      * @param {number} x Posición en x
      * @param {number} y Posición en x
@@ -653,9 +612,7 @@ var Canvas = /** @class */ (function () {
      * @param {boolean} f Relleno o no relleno por defecto esta en false
      * @param {number|Array} r Recibe un numero o un array de 4 posiciones (valores de redondez de las esquinas)
      */
-    Canvas.prototype.rect = function (x, y, w, h, c, f, r) {
-        if (f === void 0) { f = false; }
-        if (r === void 0) { r = false; }
+    rect(x, y, w, h, c, f = false, r = false) {
         if (this.ctx) {
             if (r) {
                 if (typeof r === 'number') {
@@ -701,7 +658,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Pinta un circulo
        * @param {number} x Posición en x
@@ -710,8 +667,7 @@ var Canvas = /** @class */ (function () {
      * @param {string} c Color
      * @param {boolean} f Relleno o no relleno por defecto esta en false
      */
-    Canvas.prototype.circle = function (x, y, r, c, f) {
-        if (f === void 0) { f = false; }
+    circle(x, y, r, c, f = false) {
         if (this.ctx) {
             this.ctx.beginPath();
             this.ctx.fillStyle = c;
@@ -724,7 +680,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Pinta un Arco
        * @param {number} x Posición en x
@@ -735,12 +691,8 @@ var Canvas = /** @class */ (function () {
      * @param {string} c Color
      * @param {boolean} f Relleno o no relleno por defecto esta en false
      */
-    Canvas.prototype.arc = function () {
-        var options = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            options[_i] = arguments[_i];
-        }
-        var x = options[0], y = options[1], r = options[2], _a = options[3], ang = _a === void 0 ? 0 : _a, _b = options[4], angf = _b === void 0 ? Math.PI * 2 : _b, c = options[5], _c = options[6], f = _c === void 0 ? false : _c;
+    arc(...options) {
+        const [x, y, r, ang = 0, angf = Math.PI * 2, c, f = false] = options;
         if (this.ctx) {
             this.ctx.beginPath();
             this.ctx.fillStyle = c;
@@ -753,7 +705,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Inserta una elipse dentro de un rectángulo
      * @param {number} x Posición en x
@@ -763,14 +715,10 @@ var Canvas = /** @class */ (function () {
      * @param {string} c Color
      * @param {boolean} f Relleno o no relleno por defecto esta en false
      */
-    Canvas.prototype.elipse = function () {
-        var options = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            options[_i] = arguments[_i];
-        }
-        var x = options[0], y = options[1], w = options[2], h = options[3], c = options[4], _a = options[5], f = _a === void 0 ? false : _a;
+    elipse(...options) {
+        const [x, y, w, h, c, f = false] = options;
         if (this.ctx) {
-            var esc = Math.abs(w / h);
+            let esc = Math.abs(w / h);
             this.ctx.save();
             this.ctx.scale(esc, 1);
             this.ctx.beginPath();
@@ -785,7 +733,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Pinta una linea
      * @param {number} x Posición en x
@@ -795,8 +743,7 @@ var Canvas = /** @class */ (function () {
      * @param {number} w Ancho de la linea
      * @param {string} c Color de la linea
      */
-    Canvas.prototype.line = function (x, y, xf, yf, w, c) {
-        if (w === void 0) { w = 3; }
+    line(x, y, xf, yf, w = 3, c) {
         if (this.ctx) {
             this.ctx.lineWidth = w;
             this.ctx.beginPath();
@@ -808,7 +755,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Pinta un vector o flecha
      * @param {number} x Posición en x
@@ -818,19 +765,18 @@ var Canvas = /** @class */ (function () {
      * @param {number} w Ancho de la linea
      * @param {string} c Color de la linea
      */
-    Canvas.prototype.vector = function (x, y, xf, yf, w, c) {
-        if (w === void 0) { w = 3; }
+    vector(x, y, xf, yf, w = 3, c) {
         this.line(x, y, xf, yf, w, c);
-        var ang = toGrad(angleSlope(slope({ x: x, y: y }, { x: xf, y: yf })));
+        let ang = toGrad(angleSlope(slope({ x, y }, { x: xf, y: yf })));
         this.polygon(xf, yf, 3, 10, ang, c, true);
-    };
+    }
     /**
      * Rota con respecto al angulo (beta)
      * @param {number} cx Centro de la figura en x
      * @param {number} cy Centro de la figura en y
      * @param {number} a angulo en radianes podría usar toRand(grados)
      */
-    Canvas.prototype.rotate = function (cx, cy, a) {
+    rotate(cx, cy, a) {
         if (this.ctx) {
             this.ctx.translate(cx, cy);
             this.ctx.rotate(a);
@@ -839,7 +785,7 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede rotar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Pinta un Texto
      * @param {string} t Texto a Pintar
@@ -848,9 +794,7 @@ var Canvas = /** @class */ (function () {
      * @param {number} s Tamaño del texto por defecto es 23
      * @param {string} c Color del texto
      */
-    Canvas.prototype.text = function (t, x, y, s, c) {
-        if (s === void 0) { s = 23; }
-        if (c === void 0) { c = "green"; }
+    text(t, x, y, s = 23, c = "green") {
         if (this.ctx) {
             this.ctx.fillStyle = c;
             this.ctx.font = "bold " + s + "px sans-serif";
@@ -859,16 +803,14 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
+    }
     /**
      * Establece el tamaño del canvas
      * @param {number|null} w ancho
      * @param {number|null} h alto
      * @returns "{w,h}" retorna el ancho y alto
      */
-    Canvas.prototype.size = function (w, h) {
-        if (w === void 0) { w = null; }
-        if (h === void 0) { h = null; }
+    size(w = null, h = null) {
         if (w)
             this.tag.width = w;
         if (h)
@@ -876,35 +818,35 @@ var Canvas = /** @class */ (function () {
         this.width = this.tag.width;
         this.height = this.tag.height;
         return { w: this.tag.width, h: this.tag.height };
-    };
+    }
     /**
      * Canvas en tamaño completo de la pag
      */
-    Canvas.prototype.fill = function () {
+    fill() {
         var _a;
         this.tag.width = innerWidth;
         this.tag.height = innerHeight;
         this.width = this.tag.width;
         this.height = this.tag.height;
         (_a = $("body")) === null || _a === void 0 ? void 0 : _a.css({ margin: '0', padding: '0', overflow: "hidden" });
-    };
+    }
     /**
      * Añade eventos al canvas ;
      * @param {string} e Nombre del evento "click" ,"key" etc
      * @param {function} f función que ejecuta el evento canvas.event("click",myFuncion)
      * la función recibe como parámetro los datos del evento
      */
-    Canvas.prototype.on = function (e, f) {
+    on(e, f) {
         this.$.event(e, f);
-    };
+    }
     /**
      * Quita eventos al canvas
      * @param {string} e Nombre del evento "click" ,"key" etc
      * @param {function} f función que ejecuta el evento canvas.event("click",myFuncion)
      */
-    Canvas.prototype.off = function (e, f) {
+    off(e, f) {
         this.$.removeEvent(e, f);
-    };
+    }
     /**
      * Pinta una imagen
      * cutX,cutY,cut... son para recortar,espX,espY son para efecto de espejo
@@ -920,18 +862,12 @@ var Canvas = /** @class */ (function () {
      * @param {number} espX
      * @param {number} espY
      */
-    Canvas.prototype.img = function (img, x, y, w, h, cutX, cutY, cutW, cutH, espX, espY) {
-        if (cutX === void 0) { cutX = 0; }
-        if (cutY === void 0) { cutY = 0; }
-        if (cutW === void 0) { cutW = undefined; }
-        if (cutH === void 0) { cutH = undefined; }
-        if (espX === void 0) { espX = 1; }
-        if (espY === void 0) { espY = 1; }
+    img(img, x, y, w, h, cutX = 0, cutY = 0, cutW = undefined, cutH = undefined, espX = 1, espY = 1) {
         (!cutW) ? cutW = img.width : false;
         (!cutH) ? cutH = img.height : false;
         (!w) ? w = img.width : false;
         (!h) ? h = img.height : false;
-        var ax = 0, ay = 0;
+        let ax = 0, ay = 0;
         if (espX == -1)
             ax = -w;
         if (espY == -1)
@@ -944,25 +880,25 @@ var Canvas = /** @class */ (function () {
         else {
             console.error("No se puede dibujar porque no se ha encontrado el contexto");
         }
-    };
-    Canvas.prototype.setResponsive = function (px, py) {
+    }
+    setResponsive(px, py) {
         return [px / this.width, py / this.height];
-    };
-    Canvas.prototype.getResponsive = function (px, py) {
+    }
+    getResponsive(px, py) {
         return [px * this.width, py * this.height];
-    };
+    }
     /**
      * Obtiene la posición del mouse incluso si el canvas se re-dimensiona
      * @param {event} evt recibe un evento de mouse
      * @returns "{x,y}" posiciones exactas del mouse
      */
-    Canvas.prototype.getMousePosition = function (evt) {
-        var ClientRect = this.tag.getBoundingClientRect(), scaleX = this.width / ClientRect.width, scaleY = this.height / ClientRect.height;
+    getMousePosition(evt) {
+        let ClientRect = this.tag.getBoundingClientRect(), scaleX = this.width / ClientRect.width, scaleY = this.height / ClientRect.height;
         return {
             x: (evt.clientX - ClientRect.left) * scaleX,
             y: (evt.clientY - ClientRect.top) * scaleY
         };
-    };
+    }
     /**
      * Obtiene la posición del mouse incluso si el canvas se re-dimensiona
      * @param {number} centerX centro del gradiente en x
@@ -975,23 +911,17 @@ var Canvas = /** @class */ (function () {
           ]
      * @returns "obj" un canvasGradiente
      */
-    Canvas.prototype.createRadialGradient = function (centerX, centerY, innerRadius, outerRadius, colorStops) {
-        if (centerX === void 0) { centerX = 0; }
-        if (centerY === void 0) { centerY = 0; }
-        if (innerRadius === void 0) { innerRadius = 0; }
-        if (outerRadius === void 0) { outerRadius = 0; }
-        if (colorStops === void 0) { colorStops = []; }
-        var gradient = this.ctx ? this.ctx.createRadialGradient(centerX, centerY, innerRadius, centerX, centerY, outerRadius) : null;
+    createRadialGradient(centerX = 0, centerY = 0, innerRadius = 0, outerRadius = 0, colorStops = []) {
+        const gradient = this.ctx ? this.ctx.createRadialGradient(centerX, centerY, innerRadius, centerX, centerY, outerRadius) : null;
         if (gradient) {
-            for (var i = 0; i < colorStops.length; i++) {
-                var _a = colorStops[i], offset = _a.offset, color = _a.color;
+            for (let i = 0; i < colorStops.length; i++) {
+                const { offset, color } = colorStops[i];
                 gradient.addColorStop(offset, color);
             }
         }
         return gradient;
-    };
-    return Canvas;
-}());
+    }
+}
 /**
  * calcula la intersección de dos circunferencias y retorna un vector de dos puntos
  * @param {number} h centro en x circunferencia 1
@@ -1003,24 +933,24 @@ var Canvas = /** @class */ (function () {
  * @return "[{x,y},{x,y}]" retorna un vector de dos puntos
  */
 function intersectionCircles(h, k, r, a, b, c) {
-    var w = -1 * Math.pow(h, 2) + Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2) - Math.pow(k, 2) + Math.pow(r, 2);
-    var t = -2 * b + 2 * k;
-    var z = 2 * (-h + a);
-    var parte1 = -t * w + t * z * h + k * Math.pow(z, 2);
-    var asd = Math.pow(t, 2) * Math.pow(r, 2) - Math.pow(k, 2) * Math.pow(t, 2) - 2 * k * t * w + z * (-z * Math.pow(h, 2) + 2 * w * h + 2 * k * t * h + z * Math.pow(r, 2)) - Math.pow(w, 2);
-    var parte2 = z * Math.sqrt(asd);
-    var denominador = Math.pow(t, 2) + Math.pow(z, 2);
-    var y1 = (parte1 + parte2) / denominador;
-    var y2 = (parte1 - parte2) / denominador;
-    var x1 = (y1 * t + w) / z;
-    var x2 = (y2 * t + w) / z;
+    let w = -1 * Math.pow(h, 2) + Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2) - Math.pow(k, 2) + Math.pow(r, 2);
+    let t = -2 * b + 2 * k;
+    let z = 2 * (-h + a);
+    let parte1 = -t * w + t * z * h + k * Math.pow(z, 2);
+    let asd = Math.pow(t, 2) * Math.pow(r, 2) - Math.pow(k, 2) * Math.pow(t, 2) - 2 * k * t * w + z * (-z * Math.pow(h, 2) + 2 * w * h + 2 * k * t * h + z * Math.pow(r, 2)) - Math.pow(w, 2);
+    let parte2 = z * Math.sqrt(asd);
+    let denominador = Math.pow(t, 2) + Math.pow(z, 2);
+    let y1 = (parte1 + parte2) / denominador;
+    let y2 = (parte1 - parte2) / denominador;
+    let x1 = (y1 * t + w) / z;
+    let x2 = (y2 * t + w) / z;
     return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
 }
 /**
  * Defina un Vector posee métodos para operaciones
  */
-var Vector = /** @class */ (function () {
-    function Vector(x, y, mod, ang) {
+class Vector {
+    constructor(x, y, mod, ang) {
         this.x = x;
         this.y = y;
         this.ang = 360 - ang;
@@ -1032,43 +962,43 @@ var Vector = /** @class */ (function () {
      *
      * @returns Retorna los datos del vector en formato Json
      */
-    Vector.prototype.getDataJson = function () {
-        return __assign({}, this);
-    };
+    getDataJson() {
+        return Object.assign({}, this);
+    }
     /**
      *
      * @returns Retorna los datos del vector en un Array
      *
      * Ej:[x,y,xf,yf,mod,ang]
      */
-    Vector.prototype.getDataArray = function () {
+    getDataArray() {
         return [this.x, this.y, this.xf, this.yf, this.mod, this.ang];
-    };
+    }
     /**
      *
      * @param {Canvas} canvas Recibe una instancia de la clase Canvas donde se va a pintar
      * @param {Number} w Ancho de la linea
      * @param {String} c Color
      */
-    Vector.prototype.paint = function (canvas, w, c) {
+    paint(canvas, w, c) {
         canvas.vector(this.x, this.y, this.xf, this.yf, w, c);
-    };
-    Vector.prototype.setOrigin = function (x, y) {
+    }
+    setOrigin(x, y) {
         this.x = x;
         this.y = y;
         this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
         this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
-    };
-    Vector.prototype.setMod = function (mod) {
+    }
+    setMod(mod) {
         this.mod = mod;
         this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
         this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
-    };
-    Vector.prototype.setAngle = function (ang) {
+    }
+    setAngle(ang) {
         this.ang = 360 - ang;
         this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
         this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
-    };
+    }
     // static addition(v1,v2){
     // }
     /**
@@ -1077,41 +1007,40 @@ var Vector = /** @class */ (function () {
      * @param {Vector} v Vector
      * @returns
      */
-    Vector.productPoint = function (e, v) {
-        var aux = JSON.parse(JSON.stringify(v));
-        var pp = new Vector(aux.x, aux.y, aux.mod, aux.ang);
+    static productPoint(e, v) {
+        let aux = JSON.parse(JSON.stringify(v));
+        let pp = new Vector(aux.x, aux.y, aux.mod, aux.ang);
         pp.setMod(aux.mod * e);
         return pp;
-    };
-    return Vector;
-}());
-var DolarJs = {
-    throttle: throttle,
-    debounce: debounce,
-    distanceBetweenPoints: distanceBetweenPoints,
-    createMatriz: createMatriz,
-    Random: Random,
-    Get: Get,
-    solveEquations: solveEquations,
-    toRad: toRad,
-    toGrad: toGrad,
-    binToASCII: binToASCII,
-    numToBin: numToBin,
-    asciiToText: asciiToText,
-    textToAscii: textToAscii,
-    textToBin: textToBin,
-    binToText: binToText,
-    binToNum: binToNum,
-    moveTo: moveTo,
-    GESTOR: GESTOR,
-    Canvas: Canvas,
-    intersectionCircles: intersectionCircles,
-    Vector: Vector,
-    angleSlope: angleSlope,
-    slope: slope,
-    det: det,
-    $: $,
-    calcularAnguloCuadrante: calcularAnguloCuadrante
+    }
+}
+const DolarJs = {
+    throttle,
+    debounce,
+    distanceBetweenPoints,
+    createMatriz,
+    Random,
+    Get,
+    solveEquations,
+    toRad,
+    toGrad,
+    binToASCII,
+    numToBin,
+    asciiToText,
+    textToAscii,
+    textToBin,
+    binToText,
+    binToNum,
+    moveTo,
+    GESTOR,
+    Canvas,
+    intersectionCircles,
+    Vector,
+    angleSlope,
+    slope,
+    det,
+    $,
+    calcularAnguloCuadrante
 };
-exports.default = DolarJs;
+export default DolarJs;
 //# sourceMappingURL=index.js.map
