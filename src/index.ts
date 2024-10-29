@@ -1063,4 +1063,33 @@ const DolarJs = {
     calcularAnguloCuadrante
 }
 
+export {
+    throttle,
+    debounce,
+    distanceBetweenPoints,
+    createMatriz,
+    Random,
+    Get,
+    solveEquations,
+    toRad,
+    toGrad,
+    binToASCII,
+    numToBin,
+    asciiToText,
+    textToAscii,
+    textToBin,
+    binToText,
+    binToNum,
+    moveTo,
+    GESTOR,
+    Canvas,
+    intersectionCircles,
+    Vector,
+    angleSlope,
+    slope,
+    det,
+    $,
+    calcularAnguloCuadrante
+}
+
 export default DolarJs;
