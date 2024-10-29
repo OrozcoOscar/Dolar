@@ -16,21 +16,6 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Vector = exports.Canvas = exports.GESTOR = exports.binToNum = exports.binToText = exports.textToBin = exports.textToAscii = exports.asciiToText = exports.numToBin = exports.binToASCII = exports.toGrad = exports.toRad = void 0;
-exports.$ = $;
-exports.throttle = throttle;
-exports.debounce = debounce;
-exports.distanceBetweenPoints = distanceBetweenPoints;
-exports.createMatriz = createMatriz;
-exports.Random = Random;
-exports.Get = Get;
-exports.solveEquations = solveEquations;
-exports.calcularAnguloCuadrante = calcularAnguloCuadrante;
-exports.slope = slope;
-exports.angleSlope = angleSlope;
-exports.det = det;
-exports.moveTo = moveTo;
-exports.intersectionCircles = intersectionCircles;
 /**
  * Función para facilitar el manejo del DOM
  * @param {string} argument Selector Css (".micaja","#midiv","body",etc..)
@@ -476,13 +461,11 @@ function det(M) {
  * @param {Number} g Grados.
  */
 var toRad = function (g) { return g * Math.PI / 180; };
-exports.toRad = toRad;
 /**
  * Convierte radianes en Grados
  * @param {Number} r Radianes.
  */
 var toGrad = function (r) { return r * 180 / Math.PI; };
-exports.toGrad = toGrad;
 /**
  * Convierte binario en Ascii
  * @param {Array} bin Array de Números binario.
@@ -491,43 +474,36 @@ var binToASCII = function (bin) {
     if (bin === void 0) { bin = []; }
     return bin.map(function (b) { return parseInt(parseInt(b.toString(), 2).toString(10)); });
 };
-exports.binToASCII = binToASCII;
 /**
  * Convierte números en binario
  * @param {Number} num Numero decimal.
  */
 var numToBin = function (num) { return num.toString(2); };
-exports.numToBin = numToBin;
 /**
  * Convierte números ascii en texto
  * @param {Array} ascii Array de números ascii.
  */
 var asciiToText = function (ascii) { return String.fromCharCode.apply(String, ascii); };
-exports.asciiToText = asciiToText;
 /**
  * Convierte texto en  ascii
  * @param {String} text Texto a convertir.
  */
 var textToAscii = function (text) { return text.split("").map(function (c) { return c.charCodeAt(0); }); };
-exports.textToAscii = textToAscii;
 /**
  * Convierte texto en  binario
  * @param {String} text Texto a convertir.
  */
-var textToBin = function (text) { return (0, exports.textToAscii)(text).map(function (c) { return (0, exports.numToBin)(c); }); };
-exports.textToBin = textToBin;
+var textToBin = function (text) { return textToAscii(text).map(function (c) { return numToBin(c); }); };
 /**
  * Convierte binario en  texto
  * @param {Array} bin array de binarios.
  */
-var binToText = function (bin) { return (0, exports.asciiToText)((0, exports.binToASCII)(bin)); };
-exports.binToText = binToText;
+var binToText = function (bin) { return asciiToText(binToASCII(bin)); };
 /**
  * Convierte binario en decimal
  * @param {String} bin numero binario a convertir.
  */
 var binToNum = function (bin) { return parseInt(bin, 2); };
-exports.binToNum = binToNum;
 /**
      * mueve un elemento html;
      * @param obj:String("selector del elemento (.element,#element o etiqueta html)")
@@ -574,7 +550,6 @@ var GESTOR = /** @class */ (function () {
     }
     return GESTOR;
 }());
-exports.GESTOR = GESTOR;
 /**
      * Prepara un Canvas
      * new Canvas()  o new Canvas("#mycanvas")
@@ -650,7 +625,7 @@ var Canvas = /** @class */ (function () {
             }
         }
         for (var i = 0; i < n; i++) {
-            radians = (0, exports.toRad)(angulo);
+            radians = toRad(angulo);
             vx[i] = x + radio * Math.cos(radians);
             vy[i] = y + radio * Math.sin(radians);
             angulo += incremento;
@@ -687,10 +662,10 @@ var Canvas = /** @class */ (function () {
                     this.ctx.beginPath();
                     this.ctx.fillStyle = c;
                     this.ctx.strokeStyle = c;
-                    this.ctx.arc(x + r, y + r, r, (0, exports.toRad)(180), (0, exports.toRad)(-90));
-                    this.ctx.arc(x + w - r, y + r, r, (0, exports.toRad)(-90), (0, exports.toRad)(0));
-                    this.ctx.arc(x + w - r, y + h - r, r, (0, exports.toRad)(0), (0, exports.toRad)(90));
-                    this.ctx.arc(x + r, y + h - r, r, (0, exports.toRad)(90), (0, exports.toRad)(180));
+                    this.ctx.arc(x + r, y + r, r, toRad(180), toRad(-90));
+                    this.ctx.arc(x + w - r, y + r, r, toRad(-90), toRad(0));
+                    this.ctx.arc(x + w - r, y + h - r, r, toRad(0), toRad(90));
+                    this.ctx.arc(x + r, y + h - r, r, toRad(90), toRad(180));
                     this.ctx.moveTo(x, y + r);
                     this.ctx.lineTo(x, y + h - r);
                     this.ctx.stroke();
@@ -700,10 +675,10 @@ var Canvas = /** @class */ (function () {
                         this.ctx.beginPath();
                         this.ctx.fillStyle = c;
                         this.ctx.strokeStyle = c;
-                        this.ctx.arc(x + r[0], y + r[0], r[0], (0, exports.toRad)(180), (0, exports.toRad)(-90));
-                        this.ctx.arc(x + w - r[1], y + r[1], r[1], (0, exports.toRad)(-90), (0, exports.toRad)(0));
-                        this.ctx.arc(x + w - r[2], y + h - r[2], r[2], (0, exports.toRad)(0), (0, exports.toRad)(90));
-                        this.ctx.arc(x + r[3], y + h - r[3], r[3], (0, exports.toRad)(90), (0, exports.toRad)(180));
+                        this.ctx.arc(x + r[0], y + r[0], r[0], toRad(180), toRad(-90));
+                        this.ctx.arc(x + w - r[1], y + r[1], r[1], toRad(-90), toRad(0));
+                        this.ctx.arc(x + w - r[2], y + h - r[2], r[2], toRad(0), toRad(90));
+                        this.ctx.arc(x + r[3], y + h - r[3], r[3], toRad(90), toRad(180));
                         this.ctx.moveTo(x, y + r[0]);
                         this.ctx.lineTo(x, y + h - r[3]);
                         this.ctx.stroke();
@@ -846,7 +821,7 @@ var Canvas = /** @class */ (function () {
     Canvas.prototype.vector = function (x, y, xf, yf, w, c) {
         if (w === void 0) { w = 3; }
         this.line(x, y, xf, yf, w, c);
-        var ang = (0, exports.toGrad)(angleSlope(slope({ x: x, y: y }, { x: xf, y: yf })));
+        var ang = toGrad(angleSlope(slope({ x: x, y: y }, { x: xf, y: yf })));
         this.polygon(xf, yf, 3, 10, ang, c, true);
     };
     /**
@@ -1017,7 +992,6 @@ var Canvas = /** @class */ (function () {
     };
     return Canvas;
 }());
-exports.Canvas = Canvas;
 /**
  * calcula la intersección de dos circunferencias y retorna un vector de dos puntos
  * @param {number} h centro en x circunferencia 1
@@ -1051,8 +1025,8 @@ var Vector = /** @class */ (function () {
         this.y = y;
         this.ang = 360 - ang;
         this.mod = mod;
-        this.xf = Math.cos((0, exports.toRad)(this.ang)) * this.mod + this.x;
-        this.yf = Math.sin((0, exports.toRad)(this.ang)) * this.mod + this.y;
+        this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
+        this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
     }
     /**
      *
@@ -1082,18 +1056,18 @@ var Vector = /** @class */ (function () {
     Vector.prototype.setOrigin = function (x, y) {
         this.x = x;
         this.y = y;
-        this.xf = Math.cos((0, exports.toRad)(this.ang)) * this.mod + this.x;
-        this.yf = Math.sin((0, exports.toRad)(this.ang)) * this.mod + this.y;
+        this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
+        this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
     };
     Vector.prototype.setMod = function (mod) {
         this.mod = mod;
-        this.xf = Math.cos((0, exports.toRad)(this.ang)) * this.mod + this.x;
-        this.yf = Math.sin((0, exports.toRad)(this.ang)) * this.mod + this.y;
+        this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
+        this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
     };
     Vector.prototype.setAngle = function (ang) {
         this.ang = 360 - ang;
-        this.xf = Math.cos((0, exports.toRad)(this.ang)) * this.mod + this.x;
-        this.yf = Math.sin((0, exports.toRad)(this.ang)) * this.mod + this.y;
+        this.xf = Math.cos(toRad(this.ang)) * this.mod + this.x;
+        this.yf = Math.sin(toRad(this.ang)) * this.mod + this.y;
     };
     // static addition(v1,v2){
     // }
@@ -1111,7 +1085,6 @@ var Vector = /** @class */ (function () {
     };
     return Vector;
 }());
-exports.Vector = Vector;
 var DolarJs = {
     throttle: throttle,
     debounce: debounce,
@@ -1120,15 +1093,15 @@ var DolarJs = {
     Random: Random,
     Get: Get,
     solveEquations: solveEquations,
-    toRad: exports.toRad,
-    toGrad: exports.toGrad,
-    binToASCII: exports.binToASCII,
-    numToBin: exports.numToBin,
-    asciiToText: exports.asciiToText,
-    textToAscii: exports.textToAscii,
-    textToBin: exports.textToBin,
-    binToText: exports.binToText,
-    binToNum: exports.binToNum,
+    toRad: toRad,
+    toGrad: toGrad,
+    binToASCII: binToASCII,
+    numToBin: numToBin,
+    asciiToText: asciiToText,
+    textToAscii: textToAscii,
+    textToBin: textToBin,
+    binToText: binToText,
+    binToNum: binToNum,
     moveTo: moveTo,
     GESTOR: GESTOR,
     Canvas: Canvas,
@@ -1137,7 +1110,8 @@ var DolarJs = {
     angleSlope: angleSlope,
     slope: slope,
     det: det,
-    $: $
+    $: $,
+    calcularAnguloCuadrante: calcularAnguloCuadrante
 };
 exports.default = DolarJs;
 //# sourceMappingURL=index.js.map

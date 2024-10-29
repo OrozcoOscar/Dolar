@@ -10,7 +10,7 @@ import { $ObjType, ArcOptionsType, CallbackType, EllipseOptionsType, InputsEleme
  * Función para facilitar el manejo del DOM
  * @param {string} argument Selector Css (".micaja","#midiv","body",etc..)
  */
-export function $(argument: string) {
+function $(argument: string) {
     class obj {
         tag: $ObjType
         _current: obj[] = []
@@ -224,7 +224,7 @@ export function $(argument: string) {
  * @param {number} delay - Retraso en milisegundos.
  * @returns {Function} - Función envuelta que aplica el throttle.
  */
-export function throttle(callback: CallbackType, delay: number): CallbackType {
+function throttle(callback: CallbackType, delay: number): CallbackType {
     let lastExecution = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
 
@@ -250,7 +250,7 @@ export function throttle(callback: CallbackType, delay: number): CallbackType {
  * @param {number} delay - Retraso en milisegundos.
  * @returns {Function} - Función envuelta que aplica el debounce.
  */
-export function debounce(callback: CallbackType, delay: number): CallbackType {
+function debounce(callback: CallbackType, delay: number): CallbackType {
     let timeoutId: ReturnType<typeof setTimeout>;
 
     return function (this: any, ...args: any[]) {
@@ -266,7 +266,7 @@ export function debounce(callback: CallbackType, delay: number): CallbackType {
      * @param p1 primer punto.
      * @param p2  segundo punto.
      */
-export function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
+function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) {
     return Math.sqrt((p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2)
 }
 /**
@@ -276,7 +276,7 @@ export function distanceBetweenPoints(p1 = { x: 0, y: 0 }, p2 = { x: 0, y: 0 }) 
  * @param {any} r Relleno
  * @returns Una Matriz
  */
-export function createMatriz(f: number, c: number, r: any = 0): any[][] {
+function createMatriz(f: number, c: number, r: any = 0): any[][] {
     let m: any[][] = [];
     for (var i = 0; i < f; i++) {
         m[i] = [];
@@ -286,7 +286,7 @@ export function createMatriz(f: number, c: number, r: any = 0): any[][] {
     }
     return m;
 }
-export function Random(min: number, max: number) { return Math.floor(Math.random() * (max - min)) + min; }//no incluye al max
+function Random(min: number, max: number) { return Math.floor(Math.random() * (max - min)) + min; }//no incluye al max
 /**
  * 
  * @returns {Json} Retorna un json con los parámetros obtenidos de la url o método GET
@@ -295,7 +295,7 @@ export function Random(min: number, max: number) { return Math.floor(Math.random
  * Retorna los parámetros obtenidos de la URL o método GET como un objeto JSON.
  * @returns {Object} - Objeto JSON con los parámetros obtenidos.
  */
-export function Get(): object | null {
+function Get(): object | null {
     const searchParams = new URLSearchParams(window.location.search);
     const params: { [key: string]: string } = {};
 
@@ -314,7 +314,7 @@ export function Get(): object | null {
      * Ej: M=[[2,1],[5,2]] equality=[10,10]
      *  es equivalente  a 2x+y=10 ; 5x+2y=10
      */
-export function solveEquations(M: number[][] = [[]], equality: number[] = []) {
+function solveEquations(M: number[][] = [[]], equality: number[] = []) {
     let detM = det(M);
     function remplazarCol(M: number[][], V: number[], c: number) {
         let A = M.map(e => e.map(i => i)); // Crea una copia para matar el puntero
@@ -343,7 +343,7 @@ export function solveEquations(M: number[][] = [[]], equality: number[] = []) {
  * @param {Object} p2 Segundo punto.
  * @returns {number} Ángulo en radianes.
  */
-export function calcularAnguloCuadrante(p1: { x: number, y: number } = { x: 0, y: 0 }, p2: { x: number, y: number } = { x: 0, y: 0 }): number {
+function calcularAnguloCuadrante(p1: { x: number, y: number } = { x: 0, y: 0 }, p2: { x: number, y: number } = { x: 0, y: 0 }): number {
     let a = angleSlope(slope(p1, p2));
     if ((p2.x <= p1.x && p2.y <= p1.y) || (p2.x < p1.x && p2.y >= p1.y)) {
         a = Math.PI + a;
@@ -363,7 +363,7 @@ export function calcularAnguloCuadrante(p1: { x: number, y: number } = { x: 0, y
  * @param {Object} p2 segundo punto 
  * @returns {number} Pendiente
  */
-export function slope(p1: { x: number, y: number } = { x: 0, y: 0 }, p2: { x: number, y: number } = { x: 0, y: 0 }): number {
+function slope(p1: { x: number, y: number } = { x: 0, y: 0 }, p2: { x: number, y: number } = { x: 0, y: 0 }): number {
     return (p2.y - p1.y) / (p2.x - p1.x);
 }
 
@@ -372,7 +372,7 @@ export function slope(p1: { x: number, y: number } = { x: 0, y: 0 }, p2: { x: nu
  * @param {number} m Pendiente
  * @returns {number} Ángulo en radianes
  */
-export function angleSlope(m: number): number {
+function angleSlope(m: number): number {
     return Math.atan(m);
 }
 
@@ -381,7 +381,7 @@ export function angleSlope(m: number): number {
  * @param {number[][]} M Matriz
  * @returns {number} Determinante
  */
-export function det(M: number[][]): number {
+function det(M: number[][]): number {
     let n = M.length;
     let aux = M;
     let d = 0;
@@ -419,47 +419,47 @@ export function det(M: number[][]): number {
  * Convierte grados en Radianes 
  * @param {Number} g Grados.
  */
-export const toRad = (g: number) => g * Math.PI / 180;
+const toRad = (g: number) => g * Math.PI / 180;
 /**
  * Convierte radianes en Grados 
  * @param {Number} r Radianes.
  */
-export const toGrad = (r: number) => r * 180 / Math.PI;
+const toGrad = (r: number) => r * 180 / Math.PI;
 /**
  * Convierte binario en Ascii
  * @param {Array} bin Array de Números binario.
  */
-export const binToASCII = (bin: number[] = []) => bin.map(b => parseInt(parseInt(b.toString(), 2).toString(10)));
+const binToASCII = (bin: number[] = []) => bin.map(b => parseInt(parseInt(b.toString(), 2).toString(10)));
 /**
  * Convierte números en binario
  * @param {Number} num Numero decimal.
  */
-export const numToBin = (num: number) => num.toString(2);
+const numToBin = (num: number) => num.toString(2);
 /**
  * Convierte números ascii en texto
  * @param {Array} ascii Array de números ascii.
  */
-export const asciiToText = (ascii: number[]) => String.fromCharCode(...ascii);
+const asciiToText = (ascii: number[]) => String.fromCharCode(...ascii);
 /**
  * Convierte texto en  ascii
  * @param {String} text Texto a convertir.
  */
-export const textToAscii = (text: string) => text.split("").map(c => c.charCodeAt(0));
+const textToAscii = (text: string) => text.split("").map(c => c.charCodeAt(0));
 /**
  * Convierte texto en  binario
  * @param {String} text Texto a convertir.
  */
-export const textToBin = (text: string) => textToAscii(text).map(c => numToBin(c));
+const textToBin = (text: string) => textToAscii(text).map(c => numToBin(c));
 /**
  * Convierte binario en  texto
  * @param {Array} bin array de binarios.
  */
-export const binToText = (bin: number[]) => asciiToText(binToASCII(bin));
+const binToText = (bin: number[]) => asciiToText(binToASCII(bin));
 /**
  * Convierte binario en decimal
  * @param {String} bin numero binario a convertir.
  */
-export const binToNum = (bin: string) => parseInt(bin, 2);
+const binToNum = (bin: string) => parseInt(bin, 2);
 /**
      * mueve un elemento html;
      * @param obj:String("selector del elemento (.element,#element o etiqueta html)")
@@ -467,7 +467,7 @@ export const binToNum = (bin: string) => parseInt(bin, 2);
      * @param y
      * @param type tipo de posición (relative,absolute)
 */
-export function moveTo(obj: string | NodeListOf<Element>, x: number, y: number, type: string = "relative") {
+function moveTo(obj: string | NodeListOf<Element>, x: number, y: number, type: string = "relative") {
     if (typeof obj === 'string') {
         obj = document.querySelectorAll(obj);
     }
@@ -481,7 +481,7 @@ export function moveTo(obj: string | NodeListOf<Element>, x: number, y: number, 
      * Muestra los fps;
      * @param tag String -> etiqueta css del contenedor de la salida(.cont,#cont)
 */
-export class GESTOR {
+class GESTOR {
     fin: number; // Fin del ciclo
     aps: number; // Actualizaciones por segundo
     fps: number; // Frames por segundo
@@ -520,7 +520,7 @@ export class GESTOR {
      * @param obj  new Canvas("#mycanvas").
      * @param obj  new Canvas(".mycanvas").
      */
-export class Canvas {
+class Canvas {
     tag: HTMLCanvasElement;
     $: any;
     width: number;
@@ -934,7 +934,7 @@ export class Canvas {
  * @param {number} c radio circunferencia 2
  * @return "[{x,y},{x,y}]" retorna un vector de dos puntos 
  */
-export function intersectionCircles(h: number, k: number, r: number, a: number, b: number, c: number) {
+function intersectionCircles(h: number, k: number, r: number, a: number, b: number, c: number) {
     let w = -1 * h ** 2 + a ** 2 + b ** 2 - c ** 2 - k ** 2 + r ** 2;
     let t = -2 * b + 2 * k;
     let z = 2 * (-h + a);
@@ -952,7 +952,7 @@ export function intersectionCircles(h: number, k: number, r: number, a: number, 
 /**
  * Defina un Vector posee métodos para operaciones
  */
-export class Vector {
+class Vector {
     x: number;
     y: number;
     ang: number;
@@ -1059,7 +1059,8 @@ const DolarJs = {
     angleSlope,
     slope,
     det,
-    $
+    $,
+    calcularAnguloCuadrante
 }
 
 export default DolarJs;

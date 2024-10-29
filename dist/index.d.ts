@@ -62,6 +62,36 @@ declare module 'dolar-js' {
         setMod(mod: number): void;
         setAngle(ang: number): void;
     }
+
+    const DolarJs: {
+        $: typeof $,
+        throttle: typeof throttle,
+        debounce: typeof debounce,
+        distanceBetweenPoints: typeof distanceBetweenPoints,
+        createMatriz: typeof createMatriz,
+        Random: typeof Random,
+        Get: typeof Get,
+        solveEquations: typeof solveEquations,
+        calcularAnguloCuadrante: typeof calcularAnguloCuadrante,
+        slope: typeof slope,
+        angleSlope: typeof angleSlope,
+        det: typeof det,
+        toRad: typeof toRad,
+        toGrad: typeof toGrad,
+        binToASCII: typeof binToASCII,
+        numToBin: typeof numToBin,
+        asciiToText: typeof asciiToText,
+        textToAscii: typeof textToAscii,
+        textToBin: typeof textToBin,
+        binToText: typeof binToText,
+        binToNum: typeof binToNum,
+        moveTo: typeof moveTo,
+        GESTOR: typeof GESTOR,
+        Canvas: typeof Canvas,
+        Vector: typeof Vector
+    }
+
+    export default DolarJs;
 }
 type $TagType = HTMLElement | Element | InputsElementsTypes | ResourceElements
 type $ObjType = $TagType | $TagType[]
